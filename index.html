@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TPI Kampanyalı Satış Analiz Raporu</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #2c3e50; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #1a3a6b 0%, #2563b0 100%);
+    color: white; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+  .header-left h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.5px; }
+  .header-left p { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+  .header-badge { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); 
+    border-radius: 8px; padding: 8px 18px; font-size: 12px; text-align: center; }
+  .header-badge strong { display: block; font-size: 18px; font-weight: 700; }
+
+  /* CONTROLS */
+  .controls {
+    background: white; padding: 18px 40px; border-bottom: 1px solid #e2e8f0;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .control-group { display: flex; align-items: center; gap: 8px; }
+  .control-group label { font-size: 13px; font-weight: 600; color: #64748b; white-space: nowrap; }
+  select {
+    padding: 8px 14px; border: 1.5px solid #cbd5e1; border-radius: 8px;
+    font-size: 13px; color: #2c3e50; background: white; cursor: pointer; outline: none;
+    transition: border-color 0.2s;
+  }
+  select:focus { border-color: #2563b0; }
+  .legend-row { display: flex; gap: 16px; margin-left: auto; align-items: center; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #64748b; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+  .dot-campaign { background: #ffd6e7; border: 1.5px solid #f472b6; }
+  .dot-weekend { background: #d1fae5; border: 1.5px solid #34d399; }
+  .dot-normal { background: #e2e8f0; border: 1.5px solid #94a3b8; }
+
+  /* MAIN */
+  .main { padding: 28px 40px; max-width: 1600px; margin: 0 auto; }
+
+  /* KPI CARDS */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .kpi-card {
+    background: white; border-radius: 12px; padding: 20px 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06); border-left: 4px solid;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+  .kpi-card.blue { border-color: #2563b0; }
+  .kpi-card.pink { border-color: #f472b6; }
+  .kpi-card.green { border-color: #10b981; }
+  .kpi-card.orange { border-color: #f59e0b; }
+  .kpi-card.purple { border-color: #8b5cf6; }
+  .kpi-label { font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+  .kpi-value { font-size: 26px; font-weight: 700; color: #1e293b; line-height: 1; }
+  .kpi-sub { font-size: 12px; color: #64748b; margin-top: 4px; }
+  .kpi-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-top: 6px; }
+  .badge-up { background: #d1fae5; color: #065f46; }
+  .badge-down { background: #fee2e2; color: #991b1b; }
+
+  /* SECTION TITLES */
+  .section-title { font-size: 15px; font-weight: 700; color: #1e293b; margin-bottom: 14px; 
+    padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; display: flex; align-items: center; gap: 8px; }
+  .section-title span { font-size: 18px; }
+
+  /* TABLE */
+  .table-section { background: white; border-radius: 14px; padding: 24px; 
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 28px; overflow: hidden; }
+  .table-wrapper { overflow-x: auto; margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { background: #f1f5f9; }
+  th { padding: 11px 14px; text-align: left; font-weight: 700; color: #475569; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.6px; white-space: nowrap; border-bottom: 2px solid #e2e8f0; }
+  td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; color: #334155; white-space: nowrap; }
+  tbody tr:hover { background: #f8fafc; }
+  tbody tr:last-child td { border-bottom: none; font-weight: 700; background: #f8fafc; color: #1e293b; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .pct { color: #64748b; font-size: 12px; }
+  .bar-cell { min-width: 100px; }
+  .bar-bg { background: #f1f5f9; border-radius: 4px; height: 8px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #2563b0, #60a5fa); }
+  .bar-fill-pink { background: linear-gradient(90deg, #f472b6, #fda4af); }
+
+  /* CHARTS GRID */
+  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 28px; }
+  .chart-card { background: white; border-radius: 14px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .chart-card.full { grid-column: 1 / -1; }
+  .chart-container { position: relative; height: 260px; margin-top: 12px; }
+  .chart-container-tall { position: relative; height: 320px; margin-top: 12px; }
+
+  /* INSIGHTS */
+  .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .insight-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+  .insight-icon { font-size: 28px; margin-bottom: 10px; }
+  .insight-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
+  .insight-text { font-size: 12.5px; color: #64748b; line-height: 1.6; }
+  .insight-highlight { color: #2563b0; font-weight: 700; }
+
+  /* TOP PRODUCTS */
+  .rank-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #f1f5f9; gap: 12px; }
+  .rank-item:last-child { border-bottom: none; }
+  .rank-num { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: white; flex-shrink: 0; }
+  .rank-1 { background: #f59e0b; }
+  .rank-2 { background: #94a3b8; }
+  .rank-3 { background: #b45309; }
+  .rank-other { background: #cbd5e1; color: #475569; }
+  .rank-name { flex: 1; font-size: 13px; font-weight: 600; color: #1e293b; }
+  .rank-value { font-size: 13px; font-weight: 700; color: #2563b0; }
+  .rank-pct { font-size: 11px; color: #94a3b8; }
+
+  /* FOOTER */
+  .footer { background: #1e293b; color: #94a3b8; text-align: center; padding: 16px; font-size: 12px; margin-top: 20px; }
+  
+  /* PRINT */
+  @media print { .controls { display: none; } }
+
+  /* TABS */
+  .tab-bar { display: flex; gap: 4px; margin-bottom: 22px; }
+  .tab-btn { padding: 9px 20px; border: 1.5px solid #e2e8f0; border-radius: 8px; background: white;
+    font-size: 13px; font-weight: 600; color: #64748b; cursor: pointer; transition: all 0.2s; }
+  .tab-btn.active { background: #2563b0; color: white; border-color: #2563b0; }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 768px) {
+    .main { padding: 16px; }
+    .header { padding: 18px 16px; }
+    .controls { padding: 14px 16px; }
+    .charts-grid { grid-template-columns: 1fr; }
+    .kpi-value { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>🏷️ TPI — Kampanyalı Satış Analiz Raporu</h1>
+    <p>Kampanyalı / Kampanyasız Gün Satış Karşılaştırması &amp; Ürün Bazlı Analiz</p>
+  </div>
+  <div class="header-badge">
+    <strong id="hdr-year">2025</strong>
+    <span id="hdr-month-label">Tüm Yıl</span>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="control-group">
+    <label>📅 Yıl</label>
+    <select id="yearSel" onchange="onYearChange()">
+      <option value="2025">2025</option>
+      <option value="2026">2026</option>
+    </select>
+  </div>
+  <div class="control-group">
+    <label>📆 Ay</label>
+    <select id="monthSel" onchange="render()">
+      <option value="all">Tüm Yıl</option>
+    </select>
+  </div>
+  <div class="control-group">
+    <label>💊 Ürün</label>
+    <select id="productSel" onchange="render()">
+      <option value="all">Tüm Ürünler</option>
+    </select>
+  </div>
+  <div class="legend-row">
+    <div class="legend-item"><div class="legend-dot dot-campaign"></div> Kampanyalı Gün</div>
+    <div class="legend-item"><div class="legend-dot dot-weekend"></div> Hafta Sonu</div>
+    <div class="legend-item"><div class="legend-dot dot-normal"></div> Normal Gün</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid" id="kpiGrid"></div>
+
+  <!-- TAB BAR -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tablo')">📋 Ürün Tablosu</button>
+    <button class="tab-btn" onclick="switchTab('grafikler')">📊 Grafikler</button>
+    <button class="tab-btn" onclick="switchTab('ongoru')">🔮 Öngörüler &amp; Analizler</button>
+  </div>
+
+  <!-- TAB: TABLO -->
+  <div id="tab-tablo">
+    <div class="table-section">
+      <div class="section-title"><span>📋</span> Ürün Bazlı Satış Detayı</div>
+      <div class="table-wrapper">
+        <table id="mainTable">
+          <thead>
+            <tr>
+              <th style="min-width:140px">ÜRÜN</th>
+              <th class="num">KAMPANYALI<br>GÜN SAYISI</th>
+              <th class="num">KAMPANYALI GÜN<br>KUTU SATIŞ</th>
+              <th class="num bar-cell">Kampanyalı %</th>
+              <th class="num">KAMPANYASIZ GÜN<br>KUTU SATIŞ</th>
+              <th class="num bar-cell">Kampanyasız %</th>
+              <th class="num">TOPLAM<br>SATIŞ</th>
+              <th class="num">KAMPANYA<br>ETKİSİ</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: GRAFİKLER -->
+  <div id="tab-grafikler" class="hidden">
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="section-title"><span>📊</span> Ürün Bazlı Kampanyalı vs Kampanyasız Satış</div>
+        <div class="chart-container-tall"><canvas id="chartStackedBar"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="section-title"><span>🥧</span> Kampanyalı / Kampanyasız Dağılımı</div>
+        <div class="chart-container"><canvas id="chartDoughnut"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="section-title"><span>📈</span> Aylık Toplam Satış Trendi</div>
+        <div class="chart-container"><canvas id="chartMonthly"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="section-title"><span>⚡</span> Kampanya Etkisi (Kampanyalı/Kampanyasız Oran)</div>
+        <div class="chart-container"><canvas id="chartRatio"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="section-title"><span>🏆</span> Ürün Pazar Payı (Toplam Satış)</div>
+        <div class="chart-container"><canvas id="chartShare"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: ÖNGÖRÜLER -->
+  <div id="tab-ongoru" class="hidden">
+    <div class="insights-grid" id="insightsGrid"></div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="section-title"><span>🔮</span> Kampanya Günü Başına Ortalama Satış</div>
+        <div class="chart-container-tall"><canvas id="chartAvgDay"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="section-title"><span>📅</span> Aylık Kampanya Günü Sayısı</div>
+        <div class="chart-container-tall"><canvas id="chartCampDays"></canvas></div>
+      </div>
+    </div>
+
+    <div class="table-section">
+      <div class="section-title"><span>🏆</span> Kampanya Verimliliği Sıralaması</div>
+      <div id="rankList" style="padding-top:8px"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  TPI Kampanyalı Satış Raporu &nbsp;|&nbsp; Veriler: 2025 Kampanyalı Satışlar &amp; 2026 Kampanyalı Satışlar sayfalarından alınmıştır &nbsp;|&nbsp; Yeşil: Hafta sonu, Pembe: Kampanyalı gün
+</div>
+
+<script>
+const SALES_DATA = {"2025":{"2025-01":[{"product":"FSD","campaign_days":13,"campaign_total":290005,"non_campaign_total":91991,"total":381996},{"product":"GFS","campaign_days":13,"campaign_total":154743,"non_campaign_total":66413,"total":221156},{"product":"FS B  \u015eURUP","campaign_days":13,"campaign_total":35134,"non_campaign_total":23655,"total":58789},{"product":"NADIXA","campaign_days":13,"campaign_total":13855,"non_campaign_total":6440,"total":20295},{"product":"ZALAIN CREAM","campaign_days":13,"campaign_total":90636,"non_campaign_total":38742,"total":129378},{"product":"OXYNAZ 0.1","campaign_days":13,"campaign_total":30613,"non_campaign_total":18069,"total":48682},{"product":"ZOFER 4 MG","campaign_days":13,"campaign_total":7700,"non_campaign_total":4284,"total":11984},{"product":"DOLGIT","campaign_days":13,"campaign_total":151248,"non_campaign_total":59543,"total":210791},{"product":"LODINE","campaign_days":13,"campaign_total":40490,"non_campaign_total":17289,"total":57779},{"product":"BATTICON 100","campaign_days":13,"campaign_total":9698,"non_campaign_total":5290,"total":14988},{"product":"BATTICON 30","campaign_days":13,"campaign_total":12161,"non_campaign_total":5636,"total":17797},{"product":"BIZMOPEN","campaign_days":13,"campaign_total":36003,"non_campaign_total":16344,"total":52347},{"product":"OXYNAZ 0.5","campaign_days":13,"campaign_total":42116,"non_campaign_total":24695,"total":66811},{"product":"ZEDPREX 24 CAP","campaign_days":13,"campaign_total":149284,"non_campaign_total":37760,"total":187044}],"2025-02":[{"product":"FSD","campaign_days":15,"campaign_total":334162,"non_campaign_total":67498,"total":401660},{"product":"GFS","campaign_days":15,"campaign_total":166804,"non_campaign_total":43847,"total":210651},{"product":"FS B  \u015eURUP","campaign_days":15,"campaign_total":40162,"non_campaign_total":13800,"total":53962},{"product":"NADIXA","campaign_days":15,"campaign_total":13994,"non_campaign_total":4474,"total":18468},{"product":"ZALAIN CREAM","campaign_days":15,"campaign_total":108017,"non_campaign_total":25985,"total":134002},{"product":"OXYNAZ 0.1","campaign_days":15,"campaign_total":35682,"non_campaign_total":13455,"total":49137},{"product":"BATTICON 100","campaign_days":15,"campaign_total":9734,"non_campaign_total":2742,"total":12476},{"product":"BATTICON 30","campaign_days":15,"campaign_total":9999,"non_campaign_total":3568,"total":13567},{"product":"BIZMOPEN","campaign_days":15,"campaign_total":37052,"non_campaign_total":12004,"total":49056},{"product":"DOLGIT","campaign_days":15,"campaign_total":158427,"non_campaign_total":42490,"total":200917},{"product":"LODINE","campaign_days":15,"campaign_total":42736,"non_campaign_total":12244,"total":54980},{"product":"OXYNAZ 0.5","campaign_days":15,"campaign_total":51337,"non_campaign_total":17413,"total":68750},{"product":"ZEDPREX 24 CAP","campaign_days":15,"campaign_total":174341,"non_campaign_total":48885,"total":223226}],"2025-03":[{"product":"FSD","campaign_days":14,"campaign_total":262397,"non_campaign_total":89501,"total":351898},{"product":"GFS","campaign_days":14,"campaign_total":131555,"non_campaign_total":57017,"total":188572},{"product":"FS B  \u015eURUP","campaign_days":14,"campaign_total":30459,"non_campaign_total":18279,"total":48738},{"product":"NADIXA","campaign_days":14,"campaign_total":12432,"non_campaign_total":5786,"total":18218},{"product":"ZALAIN CREAM","campaign_days":14,"campaign_total":72989,"non_campaign_total":32789,"total":105778},{"product":"OXYNAZ 0.1","campaign_days":14,"campaign_total":25783,"non_campaign_total":16291,"total":42074},{"product":"BATTICON 100","campaign_days":14,"campaign_total":7396,"non_campaign_total":3924,"total":11320},{"product":"BATTICON 30","campaign_days":14,"campaign_total":7673,"non_campaign_total":3880,"total":11553},{"product":"BIZMOPEN","campaign_days":14,"campaign_total":34136,"non_campaign_total":14754,"total":48890},{"product":"DOLGIT","campaign_days":14,"campaign_total":128264,"non_campaign_total":56501,"total":184765},{"product":"LODINE","campaign_days":14,"campaign_total":36237,"non_campaign_total":14701,"total":50938},{"product":"OXYNAZ 0.5","campaign_days":14,"campaign_total":41004,"non_campaign_total":18760,"total":59764},{"product":"ZEDPREX 24 CAP","campaign_days":14,"campaign_total":127620,"non_campaign_total":65052,"total":192672}],"2025-04":[{"product":"FSD","campaign_days":13,"campaign_total":338547,"non_campaign_total":76680,"total":415227},{"product":"GFS","campaign_days":13,"campaign_total":172671,"non_campaign_total":43736,"total":216407},{"product":"FS B  \u015eURUP","campaign_days":13,"campaign_total":36826,"non_campaign_total":12574,"total":49400},{"product":"NADIXA","campaign_days":13,"campaign_total":15313,"non_campaign_total":4445,"total":19758},{"product":"ZALAIN CREAM","campaign_days":13,"campaign_total":96396,"non_campaign_total":24483,"total":120879},{"product":"OXYNAZ 0.1","campaign_days":13,"campaign_total":32116,"non_campaign_total":9999,"total":42115},{"product":"BATTICON 100","campaign_days":13,"campaign_total":9779,"non_campaign_total":2829,"total":12608},{"product":"BATTICON 30","campaign_days":13,"campaign_total":9936,"non_campaign_total":2990,"total":12926},{"product":"BIZMOPEN","campaign_days":13,"campaign_total":38440,"non_campaign_total":9723,"total":48163},{"product":"DOLGIT","campaign_days":13,"campaign_total":162600,"non_campaign_total":38843,"total":201443},{"product":"LODINE","campaign_days":13,"campaign_total":41779,"non_campaign_total":11032,"total":52811},{"product":"OXYNAZ 0.5","campaign_days":13,"campaign_total":54680,"non_campaign_total":14513,"total":69193},{"product":"ZEDPREX 24 CAP","campaign_days":13,"campaign_total":159700,"non_campaign_total":39739,"total":199439}],"2025-05":[{"product":"FSD","campaign_days":11,"campaign_total":292034,"non_campaign_total":126706,"total":418740},{"product":"GFS","campaign_days":11,"campaign_total":157064,"non_campaign_total":67434,"total":224498},{"product":"FS B  \u015eURUP","campaign_days":11,"campaign_total":32928,"non_campaign_total":19011,"total":51939},{"product":"NADIXA","campaign_days":11,"campaign_total":14038,"non_campaign_total":7127,"total":21165},{"product":"ZALAIN CREAM","campaign_days":11,"campaign_total":86127,"non_campaign_total":45491,"total":131618},{"product":"OXYNAZ 0.1","campaign_days":11,"campaign_total":28682,"non_campaign_total":17038,"total":45720},{"product":"BATTICON 100","campaign_days":11,"campaign_total":8895,"non_campaign_total":4784,"total":13679},{"product":"BATTICON 30","campaign_days":11,"campaign_total":8880,"non_campaign_total":5076,"total":13956},{"product":"BIZMOPEN","campaign_days":11,"campaign_total":38153,"non_campaign_total":18736,"total":56889},{"product":"DOLGIT","campaign_days":11,"campaign_total":145052,"non_campaign_total":72688,"total":217740},{"product":"LODINE","campaign_days":11,"campaign_total":39248,"non_campaign_total":19491,"total":58739},{"product":"OXYNAZ 0.5","campaign_days":11,"campaign_total":46268,"non_campaign_total":24900,"total":71168},{"product":"ZEDPREX 24 CAP","campaign_days":11,"campaign_total":159809,"non_campaign_total":80289,"total":240098}],"2025-06":[{"product":"FSD","campaign_days":14,"campaign_total":372025,"non_campaign_total":75649,"total":447674},{"product":"GFS","campaign_days":14,"campaign_total":195628,"non_campaign_total":49073,"total":244701},{"product":"FS B  \u015eURUP","campaign_days":14,"campaign_total":42284,"non_campaign_total":12781,"total":55065},{"product":"NADIXA","campaign_days":14,"campaign_total":16832,"non_campaign_total":4624,"total":21456},{"product":"ZALAIN CREAM","campaign_days":14,"campaign_total":105027,"non_campaign_total":25684,"total":130711},{"product":"OXYNAZ 0.1","campaign_days":14,"campaign_total":33716,"non_campaign_total":9760,"total":43476},{"product":"BATTICON 100","campaign_days":14,"campaign_total":9974,"non_campaign_total":2899,"total":12873},{"product":"BATTICON 30","campaign_days":14,"campaign_total":11136,"non_campaign_total":3202,"total":14338},{"product":"BIZMOPEN","campaign_days":14,"campaign_total":50432,"non_campaign_total":14039,"total":64471},{"product":"DOLGIT","campaign_days":14,"campaign_total":178459,"non_campaign_total":44742,"total":223201},{"product":"LODINE","campaign_days":14,"campaign_total":46698,"non_campaign_total":11718,"total":58416},{"product":"OXYNAZ 0.5","campaign_days":14,"campaign_total":60867,"non_campaign_total":16135,"total":77002},{"product":"ZEDPREX 24 CAP","campaign_days":14,"campaign_total":251441,"non_campaign_total":66266,"total":317707}],"2025-07":[{"product":"FSD","campaign_days":12,"campaign_total":333028,"non_campaign_total":108432,"total":441460},{"product":"GFS","campaign_days":12,"campaign_total":160547,"non_campaign_total":62494,"total":223041},{"product":"FS B  \u015eURUP","campaign_days":12,"campaign_total":32804,"non_campaign_total":16375,"total":49179},{"product":"NADIXA","campaign_days":12,"campaign_total":14424,"non_campaign_total":6468,"total":20892},{"product":"ZALAIN CREAM","campaign_days":12,"campaign_total":79778,"non_campaign_total":36703,"total":116481},{"product":"OXYNAZ 0.1","campaign_days":12,"campaign_total":26527,"non_campaign_total":12682,"total":39209},{"product":"BATTICON 100","campaign_days":12,"campaign_total":9327,"non_campaign_total":3853,"total":13180},{"product":"BATTICON 30","campaign_days":12,"campaign_total":9657,"non_campaign_total":3986,"total":13643},{"product":"BIZMOPEN","campaign_days":12,"campaign_total":44990,"non_campaign_total":18413,"total":63403},{"product":"DOLGIT","campaign_days":12,"campaign_total":139501,"non_campaign_total":57249,"total":196750},{"product":"LODINE","campaign_days":12,"campaign_total":36694,"non_campaign_total":14862,"total":51556},{"product":"OXYNAZ 0.5","campaign_days":12,"campaign_total":50168,"non_campaign_total":20999,"total":71167},{"product":"ZEDPREX 24 CAP","campaign_days":12,"campaign_total":235912,"non_campaign_total":114012,"total":349924}],"2025-08":[{"product":"FSD","campaign_days":13,"campaign_total":372613,"non_campaign_total":124213,"total":496826},{"product":"GFS","campaign_days":13,"campaign_total":196266,"non_campaign_total":73494,"total":269760},{"product":"FS B  \u015eURUP","campaign_days":13,"campaign_total":39218,"non_campaign_total":18668,"total":57886},{"product":"NADIXA","campaign_days":13,"campaign_total":16516,"non_campaign_total":7161,"total":23677},{"product":"ZALAIN CREAM","campaign_days":13,"campaign_total":99948,"non_campaign_total":42540,"total":142488},{"product":"OXYNAZ 0.1","campaign_days":13,"campaign_total":36147,"non_campaign_total":15703,"total":51850},{"product":"BATTICON 100","campaign_days":13,"campaign_total":11088,"non_campaign_total":4566,"total":15654},{"product":"BATTICON 30","campaign_days":13,"campaign_total":11782,"non_campaign_total":4630,"total":16412},{"product":"BIZMOPEN","campaign_days":13,"campaign_total":52696,"non_campaign_total":21239,"total":73935},{"product":"DOLGIT","campaign_days":13,"campaign_total":177568,"non_campaign_total":67684,"total":245252},{"product":"LODINE","campaign_days":13,"campaign_total":46800,"non_campaign_total":17453,"total":64253},{"product":"OXYNAZ 0.5","campaign_days":13,"campaign_total":66684,"non_campaign_total":26481,"total":93165},{"product":"ZEDPREX 24 CAP","campaign_days":13,"campaign_total":294399,"non_campaign_total":124663,"total":419062}],"2025-09":[{"product":"FSD","campaign_days":11,"campaign_total":348832,"non_campaign_total":172568,"total":521400},{"product":"GFS","campaign_days":11,"campaign_total":180892,"non_campaign_total":89289,"total":270181},{"product":"FS B  \u015eURUP","campaign_days":11,"campaign_total":38827,"non_campaign_total":22649,"total":61476},{"product":"NADIXA","campaign_days":11,"campaign_total":16313,"non_campaign_total":8641,"total":24954},{"product":"ZALAIN CREAM","campaign_days":11,"campaign_total":97025,"non_campaign_total":51892,"total":148917},{"product":"OXYNAZ 0.1","campaign_days":11,"campaign_total":36070,"non_campaign_total":18752,"total":54822},{"product":"BATTICON 100","campaign_days":11,"campaign_total":10851,"non_campaign_total":5553,"total":16404},{"product":"BATTICON 30","campaign_days":11,"campaign_total":11248,"non_campaign_total":5809,"total":17057},{"product":"BIZMOPEN","campaign_days":11,"campaign_total":51940,"non_campaign_total":29271,"total":81211},{"product":"DOLGIT","campaign_days":11,"campaign_total":185491,"non_campaign_total":91282,"total":276773},{"product":"LODINE","campaign_days":11,"campaign_total":47867,"non_campaign_total":22547,"total":70414},{"product":"OXYNAZ 0.5","campaign_days":11,"campaign_total":66577,"non_campaign_total":32842,"total":99419},{"product":"ZEDPREX 24 CAP","campaign_days":11,"campaign_total":379731,"non_campaign_total":173196,"total":552927}],"2025-10":[{"product":"FSD","campaign_days":10,"campaign_total":267186,"non_campaign_total":155800,"total":422986},{"product":"GFS","campaign_days":10,"campaign_total":140688,"non_campaign_total":84773,"total":225461},{"product":"FS B  \u015eURUP","campaign_days":10,"campaign_total":30448,"non_campaign_total":21313,"total":51761},{"product":"NADIXA","campaign_days":10,"campaign_total":12783,"non_campaign_total":8160,"total":20943},{"product":"ZALAIN CREAM","campaign_days":10,"campaign_total":74393,"non_campaign_total":49029,"total":123422},{"product":"OXYNAZ 0.1","campaign_days":10,"campaign_total":26875,"non_campaign_total":18150,"total":45025},{"product":"BATTICON 100","campaign_days":10,"campaign_total":8248,"non_campaign_total":5240,"total":13488},{"product":"BATTICON 30","campaign_days":10,"campaign_total":8543,"non_campaign_total":5589,"total":14132},{"product":"BIZMOPEN","campaign_days":10,"campaign_total":39619,"non_campaign_total":27019,"total":66638},{"product":"DOLGIT","campaign_days":10,"campaign_total":136498,"non_campaign_total":83956,"total":220454},{"product":"LODINE","campaign_days":10,"campaign_total":35851,"non_campaign_total":21319,"total":57170},{"product":"OXYNAZ 0.5","campaign_days":10,"campaign_total":47965,"non_campaign_total":30882,"total":78847},{"product":"ZEDPREX 24 CAP","campaign_days":10,"campaign_total":235302,"non_campaign_total":147146,"total":382448}],"2025-11":[{"product":"FSD","campaign_days":13,"campaign_total":362869,"non_campaign_total":115918,"total":478787},{"product":"GFS","campaign_days":13,"campaign_total":179987,"non_campaign_total":65148,"total":245135},{"product":"FS B  \u015eURUP","campaign_days":13,"campaign_total":37975,"non_campaign_total":16936,"total":54911},{"product":"NADIXA","campaign_days":13,"campaign_total":15376,"non_campaign_total":6256,"total":21632},{"product":"ZALAIN CREAM","campaign_days":13,"campaign_total":100076,"non_campaign_total":35861,"total":135937},{"product":"OXYNAZ 0.1","campaign_days":13,"campaign_total":36547,"non_campaign_total":14017,"total":50564},{"product":"BATTICON 100","campaign_days":13,"campaign_total":10350,"non_campaign_total":3886,"total":14236},{"product":"BATTICON 30","campaign_days":13,"campaign_total":10783,"non_campaign_total":4148,"total":14931},{"product":"BIZMOPEN","campaign_days":13,"campaign_total":48726,"non_campaign_total":19395,"total":68121},{"product":"DOLGIT","campaign_days":13,"campaign_total":168985,"non_campaign_total":60993,"total":229978},{"product":"LODINE","campaign_days":13,"campaign_total":43840,"non_campaign_total":15753,"total":59593},{"product":"OXYNAZ 0.5","campaign_days":13,"campaign_total":56913,"non_campaign_total":20718,"total":77631},{"product":"ZEDPREX 24 CAP","campaign_days":13,"campaign_total":280901,"non_campaign_total":130274,"total":411175}],"2025-12":[{"product":"FSD","campaign_days":13,"campaign_total":311193,"non_campaign_total":150095,"total":461288},{"product":"BIZMOPEN","campaign_days":13,"campaign_total":52067,"non_campaign_total":23791,"total":75858},{"product":"GFS","campaign_days":13,"campaign_total":186530,"non_campaign_total":82777,"total":269307},{"product":"FS B  \u015eURUP","campaign_days":13,"campaign_total":35291,"non_campaign_total":18944,"total":54235},{"product":"ZALAIN CREAM","campaign_days":13,"campaign_total":93393,"non_campaign_total":50079,"total":143472},{"product":"OXYNAZ 0.1","campaign_days":13,"campaign_total":30521,"non_campaign_total":18053,"total":48574},{"product":"BATTICON 100","campaign_days":13,"campaign_total":10100,"non_campaign_total":5454,"total":15554},{"product":"BATTICON 30","campaign_days":13,"campaign_total":10671,"non_campaign_total":5556,"total":16227},{"product":"DOLGIT","campaign_days":13,"campaign_total":160393,"non_campaign_total":80804,"total":241197},{"product":"LODINE","campaign_days":13,"campaign_total":41398,"non_campaign_total":21215,"total":62613},{"product":"OXYNAZ 0.5","campaign_days":13,"campaign_total":47700,"non_campaign_total":26199,"total":73899},{"product":"ZEDPREX 24 CAP","campaign_days":13,"campaign_total":249519,"non_campaign_total":148602,"total":398121}]},"2026":{"2026-01":[{"product":"FSD","campaign_days":14,"campaign_total":384213,"non_campaign_total":131748,"total":515961},{"product":"BIZMOPEN","campaign_days":14,"campaign_total":40499,"non_campaign_total":14617,"total":55116},{"product":"GFS","campaign_days":14,"campaign_total":236924,"non_campaign_total":87046,"total":323970},{"product":"FS B  \u015eURUP","campaign_days":14,"campaign_total":33183,"non_campaign_total":14052,"total":47235},{"product":"ZALAIN CREAM","campaign_days":14,"campaign_total":126703,"non_campaign_total":52019,"total":178722},{"product":"OXYNAZ 0.1","campaign_days":14,"campaign_total":52428,"non_campaign_total":22437,"total":74865},{"product":"BATTICON 100","campaign_days":14,"campaign_total":13625,"non_campaign_total":5630,"total":19255},{"product":"BATTICON 30","campaign_days":14,"campaign_total":13977,"non_campaign_total":5697,"total":19674},{"product":"DOLGIT","campaign_days":14,"campaign_total":185765,"non_campaign_total":73143,"total":258908},{"product":"LODINE","campaign_days":14,"campaign_total":56578,"non_campaign_total":22381,"total":78959},{"product":"OXYNAZ 0.5","campaign_days":14,"campaign_total":87208,"non_campaign_total":34618,"total":121826},{"product":"ZEDPREX 24 CAP","campaign_days":14,"campaign_total":336801,"non_campaign_total":106480,"total":443281}],"2026-02":[{"product":"FSD","campaign_days":10,"campaign_total":307710,"non_campaign_total":146416,"total":454126},{"product":"BIZMOPEN","campaign_days":10,"campaign_total":36827,"non_campaign_total":16905,"total":53732},{"product":"GFS","campaign_days":10,"campaign_total":196478,"non_campaign_total":90200,"total":286678},{"product":"FS B  \u015eURUP","campaign_days":10,"campaign_total":26875,"non_campaign_total":16080,"total":42955},{"product":"ZALAIN CREAM","campaign_days":10,"campaign_total":109803,"non_campaign_total":57660,"total":167463},{"product":"OXYNAZ 0.1","campaign_days":10,"campaign_total":43682,"non_campaign_total":25088,"total":68770},{"product":"BATTICON 100","campaign_days":10,"campaign_total":10944,"non_campaign_total":5862,"total":16806},{"product":"BATTICON 30","campaign_days":10,"campaign_total":11099,"non_campaign_total":5856,"total":16955},{"product":"DOLGIT","campaign_days":10,"campaign_total":152088,"non_campaign_total":78440,"total":230528},{"product":"LODINE","campaign_days":10,"campaign_total":41419,"non_campaign_total":23062,"total":64481},{"product":"OXYNAZ 0.5","campaign_days":10,"campaign_total":69283,"non_campaign_total":37621,"total":106904},{"product":"ZEDPREX 24 CAP","campaign_days":10,"campaign_total":175190,"non_campaign_total":109125,"total":284315}]}};
+
+const MONTHS_TR = ['','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+const PRODUCT_COLORS = ['#2563b0','#f472b6','#10b981','#f59e0b','#8b5cf6','#ef4444','#06b6d4','#84cc16','#f97316','#ec4899','#14b8a6','#a855f7','#64748b','#dc2626'];
+
+let charts = {};
+
+function fmt(n) { return n ? n.toLocaleString('tr-TR') : '-'; }
+function pct(a, b) { return b ? ((a/b)*100).toFixed(1) + '%' : '-'; }
+
+function getYearData(year) { return SALES_DATA[year] || {}; }
+function getMonths(year) { return Object.keys(getYearData(year)).sort(); }
+
+function onYearChange() {
+  const year = document.getElementById('yearSel').value;
+  const monthSel = document.getElementById('monthSel');
+  const months = getMonths(year);
+  monthSel.innerHTML = '<option value="all">Tüm Yıl</option>' +
+    months.map(m => `<option value="${m}">${MONTHS_TR[parseInt(m.split('-')[1])]} ${m.split('-')[0]}</option>`).join('');
+  document.getElementById('hdr-year').textContent = year;
+  populateProducts();
+  render();
+}
+
+function populateProducts() {
+  const year = document.getElementById('yearSel').value;
+  const month = document.getElementById('monthSel').value;
+  const prodSel = document.getElementById('productSel');
+  
+  let products = new Set();
+  const yearData = getYearData(year);
+  if (month === 'all') {
+    Object.values(yearData).forEach(m => m.forEach(p => products.add(p.product)));
+  } else {
+    (yearData[month] || []).forEach(p => products.add(p.product));
+  }
+  
+  const current = prodSel.value;
+  prodSel.innerHTML = '<option value="all">Tüm Ürünler</option>' +
+    [...products].sort().map(p => `<option value="${p}" ${p===current?'selected':''}>${p}</option>`).join('');
+}
+
+function getFilteredData() {
+  const year = document.getElementById('yearSel').value;
+  const month = document.getElementById('monthSel').value;
+  const prod = document.getElementById('productSel').value;
+  const yearData = getYearData(year);
+  
+  let monthsData = {};
+  if (month === 'all') {
+    monthsData = yearData;
+  } else {
+    if (yearData[month]) monthsData[month] = yearData[month];
+  }
+  
+  // Aggregate by product
+  let aggregated = {};
+  Object.entries(monthsData).forEach(([m, products]) => {
+    products.forEach(p => {
+      if (prod !== 'all' && p.product !== prod) return;
+      if (!aggregated[p.product]) {
+        aggregated[p.product] = { product: p.product, campaign_days: 0, campaign_total: 0, non_campaign_total: 0, total: 0, months: 0 };
+      }
+      aggregated[p.product].campaign_days = p.campaign_days; // same for all products in a month
+      aggregated[p.product].campaign_total += p.campaign_total;
+      aggregated[p.product].non_campaign_total += p.non_campaign_total;
+      aggregated[p.product].total += p.total;
+      aggregated[p.product].months++;
+    });
+  });
+  
+  return Object.values(aggregated).sort((a,b) => b.total - a.total);
+}
+
+function getCampaignDays() {
+  const year = document.getElementById('yearSel').value;
+  const month = document.getElementById('monthSel').value;
+  const yearData = getYearData(year);
+  
+  if (month !== 'all' && yearData[month]) {
+    return yearData[month][0]?.campaign_days || 0;
+  }
+  // Sum campaign days across months (each month's campaign days)
+  let total = 0;
+  Object.values(yearData).forEach(m => { if (m[0]) total += m[0].campaign_days; });
+  return total;
+}
+
+function render() {
+  const year = document.getElementById('yearSel').value;
+  const month = document.getElementById('monthSel').value;
+  const monthLabel = month === 'all' ? 'Tüm Yıl' : MONTHS_TR[parseInt(month.split('-')[1])] + ' ' + month.split('-')[0];
+  document.getElementById('hdr-month-label').textContent = monthLabel;
+  document.getElementById('hdr-year').textContent = year;
+  
+  populateProducts();
+  const data = getFilteredData();
+  
+  renderKPI(data);
+  renderTable(data);
+  renderCharts(data);
+  renderInsights(data);
+}
+
+function renderKPI(data) {
+  const totalSales = data.reduce((s,p) => s + p.total, 0);
+  const campSales = data.reduce((s,p) => s + p.campaign_total, 0);
+  const nonCampSales = data.reduce((s,p) => s + p.non_campaign_total, 0);
+  const campDays = getCampaignDays();
+  const campPct = totalSales ? ((campSales/totalSales)*100).toFixed(1) : 0;
+  const avgPerDay = campDays ? Math.round(campSales / campDays) : 0;
+  
+  document.getElementById('kpiGrid').innerHTML = `
+    <div class="kpi-card blue">
+      <div class="kpi-label">Toplam Satış</div>
+      <div class="kpi-value">${fmt(totalSales)}</div>
+      <div class="kpi-sub">Kutu</div>
+    </div>
+    <div class="kpi-card pink">
+      <div class="kpi-label">Kampanyalı Günler Satışı</div>
+      <div class="kpi-value">${fmt(campSales)}</div>
+      <div class="kpi-sub"><span class="kpi-badge badge-up">${campPct}% toplam içinde</span></div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Kampanyasız Günler Satışı</div>
+      <div class="kpi-value">${fmt(nonCampSales)}</div>
+      <div class="kpi-sub"><span class="kpi-badge badge-down">${(100-parseFloat(campPct)).toFixed(1)}% toplam içinde</span></div>
+    </div>
+    <div class="kpi-card orange">
+      <div class="kpi-label">Kampanya Günü Sayısı</div>
+      <div class="kpi-value">${campDays}</div>
+      <div class="kpi-sub">Toplam kampanyalı gün</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">Kampanya Günü Ort. Satış</div>
+      <div class="kpi-value">${fmt(avgPerDay)}</div>
+      <div class="kpi-sub">Kutu/gün (tüm ürünler)</div>
+    </div>
+  `;
+}
+
+function renderTable(data) {
+  const totalSales = data.reduce((s,p) => s + p.total, 0);
+  const maxTotal = Math.max(...data.map(p => p.total));
+  
+  const rows = data.map((p, i) => {
+    const campPct = p.total ? (p.campaign_total/p.total*100).toFixed(1) : 0;
+    const nonPct = p.total ? (p.non_campaign_total/p.total*100).toFixed(1) : 0;
+    const campBar = p.total ? (p.campaign_total/maxTotal*100).toFixed(1) : 0;
+    const nonBar = p.total ? (p.non_campaign_total/maxTotal*100).toFixed(1) : 0;
+    const ratio = p.non_campaign_total > 0 ? (p.campaign_total/p.non_campaign_total).toFixed(2) : '-';
+    const color = PRODUCT_COLORS[i % PRODUCT_COLORS.length];
+    return `<tr>
+      <td><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${color};margin-right:6px;vertical-align:middle"></span><strong>${p.product}</strong></td>
+      <td class="num">${p.campaign_days}</td>
+      <td class="num">${fmt(p.campaign_total)}</td>
+      <td class="bar-cell">
+        <div style="display:flex;align-items:center;gap:6px">
+          <div class="bar-bg" style="flex:1"><div class="bar-fill-pink" style="width:${campBar}%;height:100%;border-radius:4px;background:linear-gradient(90deg,#f472b6,#fda4af)"></div></div>
+          <span class="pct">${campPct}%</span>
+        </div>
+      </td>
+      <td class="num">${fmt(p.non_campaign_total)}</td>
+      <td class="bar-cell">
+        <div style="display:flex;align-items:center;gap:6px">
+          <div class="bar-bg" style="flex:1"><div class="bar-fill" style="width:${nonBar}%;height:100%;border-radius:4px"></div></div>
+          <span class="pct">${nonPct}%</span>
+        </div>
+      </td>
+      <td class="num"><strong>${fmt(p.total)}</strong></td>
+      <td class="num"><span style="background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:12px;font-size:12px;font-weight:700">${ratio}x</span></td>
+    </tr>`;
+  });
+  
+  // TOTAL ROW
+  const totCamp = data.reduce((s,p) => s + p.campaign_total, 0);
+  const totNon = data.reduce((s,p) => s + p.non_campaign_total, 0);
+  const totAll = data.reduce((s,p) => s + p.total, 0);
+  const avgRatio = totNon > 0 ? (totCamp/totNon).toFixed(2) : '-';
+  rows.push(`<tr>
+    <td><strong>TOPLAM</strong></td>
+    <td class="num">—</td>
+    <td class="num">${fmt(totCamp)}</td>
+    <td class="bar-cell"><span class="pct">${totAll?(totCamp/totAll*100).toFixed(1)+'%':'-'}</span></td>
+    <td class="num">${fmt(totNon)}</td>
+    <td class="bar-cell"><span class="pct">${totAll?(totNon/totAll*100).toFixed(1)+'%':'-'}</span></td>
+    <td class="num">${fmt(totAll)}</td>
+    <td class="num"><span style="background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:12px;font-size:12px;font-weight:700">${avgRatio}x</span></td>
+  </tr>`);
+  
+  document.getElementById('tableBody').innerHTML = rows.join('');
+}
+
+function destroyChart(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
+
+function renderCharts(data) {
+  // Stacked bar
+  destroyChart('chartStackedBar');
+  const ctx1 = document.getElementById('chartStackedBar').getContext('2d');
+  const labels = data.map(p => p.product);
+  charts['chartStackedBar'] = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Kampanyalı Gün Satışı', data: data.map(p => p.campaign_total), backgroundColor: '#f472b6', borderRadius: 4 },
+        { label: 'Kampanyasız Gün Satışı', data: data.map(p => p.non_campaign_total), backgroundColor: '#60a5fa', borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { size: 12 } } } },
+      scales: {
+        x: { stacked: true, ticks: { font: { size: 10 }, maxRotation: 35 } },
+        y: { stacked: true, ticks: { font: { size: 11 }, callback: v => (v/1000).toFixed(0)+'K' } }
+      }
+    }
+  });
+  
+  // Doughnut
+  destroyChart('chartDoughnut');
+  const ctx2 = document.getElementById('chartDoughnut').getContext('2d');
+  const totCamp = data.reduce((s,p) => s + p.campaign_total, 0);
+  const totNon = data.reduce((s,p) => s + p.non_campaign_total, 0);
+  charts['chartDoughnut'] = new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: ['Kampanyalı Günler', 'Kampanyasız Günler'],
+      datasets: [{ data: [totCamp, totNon], backgroundColor: ['#f472b6','#60a5fa'], borderWidth: 3, borderColor: '#fff' }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${fmt(ctx.raw)} (${(ctx.raw/(totCamp+totNon)*100).toFixed(1)}%)` } }
+      }
+    }
+  });
+
+  // Monthly trend
+  destroyChart('chartMonthly');
+  const year = document.getElementById('yearSel').value;
+  const month = document.getElementById('monthSel').value;
+  const prodFilter = document.getElementById('productSel').value;
+  const yearData = getYearData(year);
+  const months = Object.keys(yearData).sort();
+  
+  const monthLabels = months.map(m => MONTHS_TR[parseInt(m.split('-')[1])]);
+  const monthlyCamp = months.map(m => {
+    const prods = yearData[m] || [];
+    return prods.filter(p => prodFilter === 'all' || p.product === prodFilter).reduce((s,p) => s + p.campaign_total, 0);
+  });
+  const monthlyNon = months.map(m => {
+    const prods = yearData[m] || [];
+    return prods.filter(p => prodFilter === 'all' || p.product === prodFilter).reduce((s,p) => s + p.non_campaign_total, 0);
+  });
+  
+  const ctx3 = document.getElementById('chartMonthly').getContext('2d');
+  charts['chartMonthly'] = new Chart(ctx3, {
+    type: 'line',
+    data: {
+      labels: monthLabels,
+      datasets: [
+        { label: 'Kampanyalı Gün Satışı', data: monthlyCamp, borderColor: '#f472b6', backgroundColor: 'rgba(244,114,182,0.1)', fill: true, tension: 0.4, pointRadius: 5 },
+        { label: 'Kampanyasız Gün Satışı', data: monthlyNon, borderColor: '#60a5fa', backgroundColor: 'rgba(96,165,250,0.1)', fill: true, tension: 0.4, pointRadius: 5 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: { ticks: { callback: v => (v/1000).toFixed(0)+'K' } }
+      }
+    }
+  });
+
+  // Ratio chart
+  destroyChart('chartRatio');
+  const ctx4 = document.getElementById('chartRatio').getContext('2d');
+  const ratios = data.map(p => p.non_campaign_total > 0 ? parseFloat((p.campaign_total/p.non_campaign_total).toFixed(2)) : 0);
+  charts['chartRatio'] = new Chart(ctx4, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{ label: 'Kampanyalı/Kampanyasız Oran', data: ratios, backgroundColor: ratios.map(r => r >= 2 ? '#10b981' : r >= 1.5 ? '#f59e0b' : '#ef4444'), borderRadius: 6 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` Oran: ${ctx.raw}x` } }
+      },
+      scales: {
+        x: { ticks: { font: { size: 10 }, maxRotation: 35 } },
+        y: { ticks: { callback: v => v + 'x' } }
+      }
+    }
+  });
+
+  // Share chart
+  destroyChart('chartShare');
+  const ctx5 = document.getElementById('chartShare').getContext('2d');
+  charts['chartShare'] = new Chart(ctx5, {
+    type: 'pie',
+    data: {
+      labels,
+      datasets: [{ data: data.map(p => p.total), backgroundColor: PRODUCT_COLORS.slice(0, data.length), borderWidth: 2, borderColor: '#fff' }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'right', labels: { font: { size: 11 }, boxWidth: 12 } } }
+    }
+  });
+}
+
+function renderInsights(data) {
+  const totCamp = data.reduce((s,p) => s + p.campaign_total, 0);
+  const totNon = data.reduce((s,p) => s + p.non_campaign_total, 0);
+  const totAll = totCamp + totNon;
+  const campPct = totAll ? (totCamp/totAll*100).toFixed(1) : 0;
+  const campDays = getCampaignDays();
+  
+  const bestRatio = [...data].sort((a,b) => (b.campaign_total/Math.max(1,b.non_campaign_total)) - (a.campaign_total/Math.max(1,a.non_campaign_total)))[0];
+  const topProduct = data[0];
+  const worstRatio = [...data].sort((a,b) => (a.campaign_total/Math.max(1,a.non_campaign_total)) - (b.campaign_total/Math.max(1,b.non_campaign_total)))[0];
+  
+  const avgDayCamp = campDays ? Math.round(totCamp/campDays) : 0;
+  
+  const insights = [
+    {
+      icon: '🏆', title: 'En Yüksek Kampanya Etkisi',
+      text: `<strong class="insight-highlight">${bestRatio?.product}</strong> kampanyalı günlerde kampanyasız günlere kıyasla <span class="insight-highlight">${bestRatio ? (bestRatio.campaign_total/Math.max(1,bestRatio.non_campaign_total)).toFixed(2) + 'x</span>' : ''} daha fazla satıyor. Bu ürün kampanyalardan en fazla yararlanan üründür.`
+    },
+    {
+      icon: '💰', title: 'Kampanya Gelir Katkısı',
+      text: `Toplam satışın <span class="insight-highlight">%${campPct}'i</span> kampanyalı günlerde gerçekleşiyor. Bu, kampanyaların satış üzerindeki belirleyici rolünü ortaya koymaktadır.`
+    },
+    {
+      icon: '📅', title: 'Günlük Ortalama Performans',
+      text: `Kampanyalı günlerde tüm ürünler toplamında günlük ortalama <span class="insight-highlight">${fmt(avgDayCamp)} kutu</span> satış gerçekleşmektedir. Kampanyasız günlük ortalama ile kıyasla kampanya etkisi ölçülebilir.`
+    },
+    {
+      icon: '⚠️', title: 'Dikkat: Düşük Kampanya Etkisi',
+      text: `<strong class="insight-highlight">${worstRatio?.product}</strong> kampanya dönemlerinde en düşük artış oranını göstermektedir (${worstRatio ? (worstRatio.campaign_total/Math.max(1,worstRatio.non_campaign_total)).toFixed(2) + 'x' : '-'}). Bu ürün için kampanya stratejisinin gözden geçirilmesi önerilebilir.`
+    },
+    {
+      icon: '🚀', title: 'En Çok Satan Ürün',
+      text: `<span class="insight-highlight">${topProduct?.product}</span> toplam satışta lider konumdadır (${fmt(topProduct?.total)} kutu). Hem kampanyalı hem kampanyasız dönemlerde en güçlü performansı sergiliyor.`
+    },
+    {
+      icon: '📊', title: 'Kampanya Optimizasyon Önerisi',
+      text: `Kampanya günleri satışın <strong class="insight-highlight">%${campPct}'ini</strong> oluşturuyor. Yüksek kampanya etkili ürünlerin kampanya takviminde ön planlama yapılması, stok yönetimini iyileştirebilir.`
+    }
+  ];
+  
+  document.getElementById('insightsGrid').innerHTML = insights.map(i => `
+    <div class="insight-card">
+      <div class="insight-icon">${i.icon}</div>
+      <div class="insight-title">${i.title}</div>
+      <div class="insight-text">${i.text}</div>
+    </div>
+  `).join('');
+  
+  // Render ranking
+  renderRanking(data);
+  renderSmallCharts(data);
+}
+
+function renderRanking(data) {
+  const ranked = [...data].sort((a,b) => {
+    const ra = a.non_campaign_total > 0 ? a.campaign_total/a.non_campaign_total : 0;
+    const rb = b.non_campaign_total > 0 ? b.campaign_total/b.non_campaign_total : 0;
+    return rb - ra;
+  });
+  
+  document.getElementById('rankList').innerHTML = ranked.map((p, i) => {
+    const ratio = p.non_campaign_total > 0 ? (p.campaign_total/p.non_campaign_total).toFixed(2) : '-';
+    const rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'rank-other';
+    return `<div class="rank-item">
+      <div class="rank-num ${rankClass}">${i+1}</div>
+      <div class="rank-name">${p.product}</div>
+      <div>
+        <div class="rank-value">${ratio}x</div>
+        <div class="rank-pct">Kampanya etkisi</div>
+      </div>
+      <div style="margin-left:16px">
+        <div class="rank-value" style="color:#10b981">${fmt(p.campaign_total)}</div>
+        <div class="rank-pct">kampanyalı kutu</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderSmallCharts(data) {
+  // Avg per day chart
+  destroyChart('chartAvgDay');
+  const campDays = getCampaignDays();
+  const ctx6 = document.getElementById('chartAvgDay').getContext('2d');
+  const avgData = data.map(p => campDays ? Math.round(p.campaign_total/campDays) : 0);
+  charts['chartAvgDay'] = new Chart(ctx6, {
+    type: 'bar',
+    data: {
+      labels: data.map(p => p.product),
+      datasets: [{ label: 'Ort. Günlük Satış (Kampanya Dönemi)', data: avgData, backgroundColor: '#8b5cf6', borderRadius: 5 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { x: { ticks: { font: { size: 10 }, maxRotation: 35 } }, y: { ticks: { callback: v => fmt(v) } } }
+    }
+  });
+
+  // Campaign days per month
+  destroyChart('chartCampDays');
+  const year = document.getElementById('yearSel').value;
+  const yearData = getYearData(year);
+  const months = Object.keys(yearData).sort();
+  const mLabels = months.map(m => MONTHS_TR[parseInt(m.split('-')[1])]);
+  const campDaysList = months.map(m => (yearData[m] || [])[0]?.campaign_days || 0);
+  const ctx7 = document.getElementById('chartCampDays').getContext('2d');
+  charts['chartCampDays'] = new Chart(ctx7, {
+    type: 'bar',
+    data: {
+      labels: mLabels,
+      datasets: [{ label: 'Kampanyalı Gün Sayısı', data: campDaysList, backgroundColor: '#f472b6', borderRadius: 5 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  ['tablo','grafikler','ongoru'].forEach(t => {
+    document.getElementById('tab-'+t).classList.toggle('hidden', t !== tab);
+  });
+  if (tab === 'grafikler' || tab === 'ongoru') {
+    const data = getFilteredData();
+    renderCharts(data);
+    if (tab === 'ongoru') renderInsights(data);
+  }
+}
+
+// Init
+onYearChange();
+</script>
+</body>
+</html>
