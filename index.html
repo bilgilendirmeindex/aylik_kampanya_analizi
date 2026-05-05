@@ -8,20 +8,16 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #2c3e50; }
-
-  /* HEADER */
   .header {
     background: linear-gradient(135deg, #1a3a6b 0%, #2563b0 100%);
     color: white; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between;
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   }
   .header-left h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.5px; }
-  .header-left p { font-size: 13px; opacity: 0.8; margin-top: 4px; }
-  .header-badge { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); 
+  .header-left p  { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+  .header-badge { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
     border-radius: 8px; padding: 8px 18px; font-size: 12px; text-align: center; }
   .header-badge strong { display: block; font-size: 18px; font-weight: 700; }
-
-  /* CONTROLS */
   .controls {
     background: white; padding: 18px 40px; border-bottom: 1px solid #e2e8f0;
     display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
@@ -39,13 +35,9 @@
   .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #64748b; }
   .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
   .dot-campaign { background: #ffd6e7; border: 1.5px solid #f472b6; }
-  .dot-weekend { background: #d1fae5; border: 1.5px solid #34d399; }
-  .dot-normal { background: #e2e8f0; border: 1.5px solid #94a3b8; }
-
-  /* MAIN */
+  .dot-weekend  { background: #d1fae5; border: 1.5px solid #34d399; }
+  .dot-normal   { background: #e2e8f0; border: 1.5px solid #94a3b8; }
   .main { padding: 28px 40px; max-width: 1600px; margin: 0 auto; }
-
-  /* KPI CARDS */
   .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
   .kpi-card {
     background: white; border-radius: 12px; padding: 20px 22px;
@@ -53,25 +45,21 @@
     transition: transform 0.15s, box-shadow 0.15s;
   }
   .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
-  .kpi-card.blue { border-color: #2563b0; }
-  .kpi-card.pink { border-color: #f472b6; }
-  .kpi-card.green { border-color: #10b981; }
+  .kpi-card.blue   { border-color: #2563b0; }
+  .kpi-card.pink   { border-color: #f472b6; }
+  .kpi-card.green  { border-color: #10b981; }
   .kpi-card.orange { border-color: #f59e0b; }
   .kpi-card.purple { border-color: #8b5cf6; }
   .kpi-label { font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
   .kpi-value { font-size: 26px; font-weight: 700; color: #1e293b; line-height: 1; }
-  .kpi-sub { font-size: 12px; color: #64748b; margin-top: 4px; }
+  .kpi-sub   { font-size: 12px; color: #64748b; margin-top: 4px; }
   .kpi-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-top: 6px; }
-  .badge-up { background: #d1fae5; color: #065f46; }
+  .badge-up   { background: #d1fae5; color: #065f46; }
   .badge-down { background: #fee2e2; color: #991b1b; }
-
-  /* SECTION TITLES */
-  .section-title { font-size: 15px; font-weight: 700; color: #1e293b; margin-bottom: 14px; 
+  .section-title { font-size: 15px; font-weight: 700; color: #1e293b; margin-bottom: 14px;
     padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; display: flex; align-items: center; gap: 8px; }
   .section-title span { font-size: 18px; }
-
-  /* TABLE */
-  .table-section { background: white; border-radius: 14px; padding: 24px; 
+  .table-section { background: white; border-radius: 14px; padding: 24px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 28px; overflow: hidden; }
   .table-wrapper { overflow-x: auto; margin-top: 4px; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -81,66 +69,45 @@
   td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; color: #334155; white-space: nowrap; }
   tbody tr:hover { background: #f8fafc; }
   tbody tr:last-child td { border-bottom: none; font-weight: 700; background: #f8fafc; color: #1e293b; }
-  .num { text-align: right; font-variant-numeric: tabular-nums; }
-  .pct { color: #64748b; font-size: 12px; }
+  .num  { text-align: right; font-variant-numeric: tabular-nums; }
+  .pct  { color: #64748b; font-size: 12px; }
   .bar-cell { min-width: 100px; }
-  .bar-bg { background: #f1f5f9; border-radius: 4px; height: 8px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #2563b0, #60a5fa); }
-  .bar-fill-pink { background: linear-gradient(90deg, #f472b6, #fda4af); }
-
-  /* CHARTS GRID */
+  .bar-bg   { background: #f1f5f9; border-radius: 4px; height: 8px; overflow: hidden; }
   .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 28px; }
-  .chart-card { background: white; border-radius: 14px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .chart-card  { background: white; border-radius: 14px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .chart-card.full { grid-column: 1 / -1; }
-  .chart-container { position: relative; height: 260px; margin-top: 12px; }
+  .chart-container      { position: relative; height: 260px; margin-top: 12px; }
   .chart-container-tall { position: relative; height: 320px; margin-top: 12px; }
-
-  /* INSIGHTS */
   .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 28px; }
-  .insight-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
-  .insight-icon { font-size: 28px; margin-bottom: 10px; }
+  .insight-card  { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+  .insight-icon  { font-size: 28px; margin-bottom: 10px; }
   .insight-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
-  .insight-text { font-size: 12.5px; color: #64748b; line-height: 1.6; }
+  .insight-text  { font-size: 12.5px; color: #64748b; line-height: 1.6; }
   .insight-highlight { color: #2563b0; font-weight: 700; }
-
-  /* TOP PRODUCTS */
   .rank-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #f1f5f9; gap: 12px; }
   .rank-item:last-child { border-bottom: none; }
-  .rank-num { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700; color: white; flex-shrink: 0; }
-  .rank-1 { background: #f59e0b; }
-  .rank-2 { background: #94a3b8; }
-  .rank-3 { background: #b45309; }
+  .rank-num  { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 12px; font-weight: 700; color: white; flex-shrink: 0; }
+  .rank-1    { background: #f59e0b; }
+  .rank-2    { background: #94a3b8; }
+  .rank-3    { background: #b45309; }
   .rank-other { background: #cbd5e1; color: #475569; }
-  .rank-name { flex: 1; font-size: 13px; font-weight: 600; color: #1e293b; }
+  .rank-name  { flex: 1; font-size: 13px; font-weight: 600; color: #1e293b; }
   .rank-value { font-size: 13px; font-weight: 700; color: #2563b0; }
-  .rank-pct { font-size: 11px; color: #94a3b8; }
-
-  /* FOOTER */
+  .rank-pct   { font-size: 11px; color: #94a3b8; }
   .footer { background: #1e293b; color: #94a3b8; text-align: center; padding: 16px; font-size: 12px; margin-top: 20px; }
-  
-  /* PRINT */
-  @media print { .controls { display: none; } }
-
-  /* TABS */
   .tab-bar { display: flex; gap: 4px; margin-bottom: 22px; }
-  .tab-btn { padding: 9px 20px; border: 1.5px solid #e2e8f0; border-radius: 8px; background: white;
+  .tab-btn  { padding: 9px 20px; border: 1.5px solid #e2e8f0; border-radius: 8px; background: white;
     font-size: 13px; font-weight: 600; color: #64748b; cursor: pointer; transition: all 0.2s; }
   .tab-btn.active { background: #2563b0; color: white; border-color: #2563b0; }
-
   .hidden { display: none !important; }
-
   @media (max-width: 768px) {
-    .main { padding: 16px; }
-    .header { padding: 18px 16px; }
-    .controls { padding: 14px 16px; }
-    .charts-grid { grid-template-columns: 1fr; }
-    .kpi-value { font-size: 20px; }
+    .main { padding: 16px; } .header { padding: 18px 16px; } .controls { padding: 14px 16px; }
+    .charts-grid { grid-template-columns: 1fr; } .kpi-value { font-size: 20px; }
   }
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-left">
     <h1>🏷️ TPI — Kampanyalı Satış Analiz Raporu</h1>
@@ -151,14 +118,10 @@
     <span id="hdr-month-label">Tüm Yıl</span>
   </div>
 </div>
-
 <div class="controls">
   <div class="control-group">
     <label>📅 Yıl</label>
-    <select id="yearSel" onchange="onYearChange()">
-      <option value="2025">2025</option>
-      <option value="2026">2026</option>
-    </select>
+    <select id="yearSel" onchange="onYearChange()"></select>
   </div>
   <div class="control-group">
     <label>📆 Ay</label>
@@ -189,15 +152,10 @@
     <div class="legend-item"><div class="legend-dot dot-normal"></div> Normal Gün</div>
   </div>
 </div>
-
 <div class="main">
-
-  <!-- KPI CARDS -->
   <div class="kpi-grid" id="kpiGrid"></div>
-
-  <!-- TAB BAR -->
   <div class="tab-bar">
-    <button class="tab-btn active" data-tab="tablo"    onclick="switchTab('tablo')">📋 Ürün Tablosu</button>
+    <button class="tab-btn active" data-tab="tablo"     onclick="switchTab('tablo')">📋 Ürün Tablosu</button>
     <button class="tab-btn"        data-tab="grafikler" onclick="switchTab('grafikler')">📊 Grafikler</button>
     <button class="tab-btn"        data-tab="etki"      onclick="switchTab('etki')">⚡ Kampanya Etkisi</button>
     <button class="tab-btn"        data-tab="ongoru"    onclick="switchTab('ongoru')">🔮 Öngörüler &amp; Analizler</button>
@@ -207,23 +165,7 @@
   <div id="tab-tablo">
     <div class="table-section">
       <div class="section-title"><span>📋</span> Ürün Bazlı Satış Detayı</div>
-      <div class="table-wrapper">
-        <table id="mainTable">
-          <thead>
-            <tr>
-              <th style="min-width:140px">ÜRÜN</th>
-              <th class="num">KAMPANYALI<br>GÜN SAYISI</th>
-              <th class="num">KAMPANYALI GÜN<br>KUTU SATIŞ</th>
-              <th class="num bar-cell">Kampanyalı %</th>
-              <th class="num">KAMPANYASIZ GÜN<br>KUTU SATIŞ</th>
-              <th class="num bar-cell">Kampanyasız %</th>
-              <th class="num">TOPLAM<br>SATIŞ</th>
-              <th class="num">KAMPANYA<br>ETKİSİ</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody"></tbody>
-        </table>
-      </div>
+      <div class="table-wrapper"><table id="mainTable"></table></div>
     </div>
   </div>
 
@@ -231,23 +173,23 @@
   <div id="tab-grafikler" class="hidden">
     <div class="charts-grid">
       <div class="chart-card">
-        <div class="section-title"><span>📊</span> Ürün Bazlı Kampanyalı vs Kampanyasız Satış</div>
+        <div class="section-title"><span>📊</span> Ürün Bazlı Satış Dağılımı (4 Gün Türü)</div>
         <div class="chart-container-tall"><canvas id="chartStackedBar"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="section-title"><span>🥧</span> Kampanyalı / Kampanyasız Dağılımı</div>
+        <div class="section-title"><span>🥧</span> Gün Türü Dağılımı</div>
         <div class="chart-container"><canvas id="chartDoughnut"></canvas></div>
       </div>
       <div class="chart-card full">
-        <div class="section-title"><span>📈</span> Aylık Toplam Satış Trendi</div>
+        <div class="section-title"><span>📈</span> Aylık Satış Trendi (4 Gün Türü)</div>
         <div class="chart-container"><canvas id="chartMonthly"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="section-title"><span>⚡</span> Kampanya Etkisi (Kampanyalı/Kampanyasız Oran)</div>
+        <div class="section-title"><span>⚡</span> Kampanya Etkisi (Hft İçi Kamp. / Normal Hft İçi)</div>
         <div class="chart-container"><canvas id="chartRatio"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="section-title"><span>🏆</span> Ürün Pazar Payı (Toplam Satış)</div>
+        <div class="section-title"><span>🏆</span> Ürün Pazar Payı</div>
         <div class="chart-container"><canvas id="chartShare"></canvas></div>
       </div>
     </div>
@@ -255,16 +197,14 @@
 
   <!-- TAB: KAMPANYA ETKİSİ -->
   <div id="tab-etki" class="hidden">
-    <!-- Etki KPI'ları -->
     <div class="kpi-grid" id="etkiKpiGrid" style="margin-bottom:22px"></div>
-
     <div class="charts-grid">
       <div class="chart-card full">
-        <div class="section-title"><span>⚡</span> Ürün Bazlı Kampanya Etkisi — Hafta İçi Kampanyalı vs Normal Hafta İçi (Katsayı)</div>
+        <div class="section-title"><span>⚡</span> Ürün Bazlı Kampanya Katsayısı (Hft İçi Kamp. / Normal Hft İçi)</div>
         <div class="chart-container-tall"><canvas id="chartEtkiRatio"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="section-title"><span>📦</span> Ürün Bazlı Ekstra Satış (Kampanya Katkısı)</div>
+        <div class="section-title"><span>📦</span> Kampanya Katkısı (Ekstra Satış)</div>
         <div class="chart-container-tall"><canvas id="chartEtkiExtra"></canvas></div>
       </div>
       <div class="chart-card">
@@ -272,49 +212,41 @@
         <div class="chart-container-tall"><canvas id="chartEtkiAvg"></canvas></div>
       </div>
       <div class="chart-card full">
-        <div class="section-title"><span>📈</span> Aylık Hafta İçi Kampanyalı vs Normal Hafta İçi Trendi</div>
+        <div class="section-title"><span>📈</span> Aylık Hft İçi Kamp. vs Normal Hft İçi Trendi</div>
         <div class="chart-container"><canvas id="chartEtkiTrend"></canvas></div>
       </div>
     </div>
-
-    <!-- Detay Tablosu -->
     <div class="table-section">
       <div class="section-title"><span>📋</span> Kampanya Etkisi Detay Tablosu</div>
-      <div class="table-wrapper">
-        <table id="etkiTable" style="width:100%;border-collapse:collapse;font-size:13px"></table>
-      </div>
+      <div class="table-wrapper"><table id="etkiTable" style="width:100%;border-collapse:collapse;font-size:13px"></table></div>
     </div>
   </div>
 
   <!-- TAB: ÖNGÖRÜLER -->
   <div id="tab-ongoru" class="hidden">
     <div class="insights-grid" id="insightsGrid"></div>
-
     <div class="charts-grid">
       <div class="chart-card">
         <div class="section-title"><span>🔮</span> Kampanya Günü Başına Ortalama Satış</div>
         <div class="chart-container-tall"><canvas id="chartAvgDay"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="section-title"><span>📅</span> Aylık Kampanya Günü Sayısı</div>
+        <div class="section-title"><span>📅</span> Aylık Gün Sayısı Dağılımı</div>
         <div class="chart-container-tall"><canvas id="chartCampDays"></canvas></div>
       </div>
     </div>
-
     <div class="table-section">
       <div class="section-title"><span>🏆</span> Kampanya Verimliliği Sıralaması</div>
       <div id="rankList" style="padding-top:8px"></div>
     </div>
   </div>
-
 </div>
-
 <div class="footer">
-  TPI Kampanyalı Satış Raporu &nbsp;|&nbsp; Veriler: 2025 Kampanyalı Satışlar &amp; 2026 Kampanyalı Satışlar sayfalarından alınmıştır &nbsp;|&nbsp; Yeşil: Hafta sonu, Pembe: Kampanyalı gün
+  TPI Kampanyalı Satış Raporu &nbsp;|&nbsp; 🩷 Hft İçi Kampanyalı &nbsp;|&nbsp;
+  🟣 Hft Sonu Kampanyalı &nbsp;|&nbsp; 🔵 Hafta İçi &nbsp;|&nbsp; 🟢 Hafta Sonu
 </div>
-
 <script>
-const SALES_DATA = {"2025":{"2025-01":[{"product":"FSD","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":290005,"campaign_weekend_total":11442,"weekday_total":75954,"weekend_total":4595},{"product":"GFS","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":154743,"campaign_weekend_total":8548,"weekday_total":53489,"weekend_total":4376},{"product":"FS B  ŞURUP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":28233,"campaign_weekend_total":922,"weekday_total":27648,"weekend_total":1986},{"product":"NADIXA","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":30702,"campaign_weekend_total":1314,"weekday_total":12984,"weekend_total":936},{"product":"ZALAIN CREAM","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":85511,"campaign_weekend_total":3372,"weekday_total":38857,"weekend_total":2778},{"product":"OXYNAZ 0.1","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":40818,"campaign_weekend_total":2700,"weekday_total":2578,"weekend_total":1128},{"product":"ZOFER 4 MG","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":0,"campaign_weekend_total":0,"weekday_total":10218,"weekend_total":1358},{"product":"DOLGIT","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":198461,"campaign_weekend_total":10579,"weekday_total":68905,"weekend_total":4229},{"product":"LODINE","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":36174,"campaign_weekend_total":1779,"weekday_total":21450,"weekend_total":1504},{"product":"BATTICON 100","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":33777,"campaign_weekend_total":2903,"weekday_total":7203,"weekend_total":1270},{"product":"BATTICON 30","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":22966,"campaign_weekend_total":1766,"weekday_total":5825,"weekend_total":880},{"product":"BIZMOPEN","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":23170,"campaign_weekend_total":1196,"weekday_total":15569,"weekend_total":1150},{"product":"OXYNAZ 0.5","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":59804,"campaign_weekend_total":3568,"weekday_total":193,"weekend_total":109},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":81484,"campaign_weekend_total":3933,"weekday_total":30304,"weekend_total":2009}],"2025-02":[{"product":"FSD","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":321384,"campaign_weekend_total":26514,"weekday_total":48830,"weekend_total":24563},{"product":"GFS","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":166290,"campaign_weekend_total":15348,"weekday_total":34440,"weekend_total":14225},{"product":"FS B  ŞURUP","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":35150,"campaign_weekend_total":665,"weekday_total":17885,"weekend_total":4353},{"product":"NADIXA","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":32916,"campaign_weekend_total":832,"weekday_total":10486,"weekend_total":3798},{"product":"ZALAIN CREAM","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":95234,"campaign_weekend_total":7929,"weekday_total":21345,"weekend_total":7928},{"product":"OXYNAZ 0.1","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":41509,"campaign_weekend_total":5232,"weekday_total":373,"weekend_total":314},{"product":"BATTICON 100","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":56533,"campaign_weekend_total":3515,"weekday_total":5788,"weekend_total":10591},{"product":"BATTICON 30","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":41572,"campaign_weekend_total":5323,"weekday_total":5480,"weekend_total":11616},{"product":"BIZMOPEN","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":26500,"campaign_weekend_total":1362,"weekday_total":9041,"weekend_total":2137},{"product":"DOLGIT","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":200677,"campaign_weekend_total":26232,"weekday_total":51661,"weekend_total":22955},{"product":"LODINE","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":34803,"campaign_weekend_total":2426,"weekday_total":11516,"weekend_total":2707},{"product":"OXYNAZ 0.5","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":53364,"campaign_weekend_total":5917,"weekday_total":392,"weekend_total":211},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":88334,"campaign_weekend_total":7468,"weekday_total":18155,"weekend_total":6713}],"2025-03":[{"product":"FSD","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":268592,"campaign_weekend_total":12179,"weekday_total":50655,"weekend_total":13083},{"product":"GFS","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":138087,"campaign_weekend_total":8255,"weekday_total":35199,"weekend_total":9255},{"product":"FS B  ŞURUP","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":32630,"campaign_weekend_total":1792,"weekday_total":11960,"weekend_total":2671},{"product":"NADIXA","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":30066,"campaign_weekend_total":2057,"weekday_total":9077,"weekend_total":2149},{"product":"ZALAIN CREAM","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":79935,"campaign_weekend_total":4268,"weekday_total":23353,"weekend_total":4900},{"product":"OXYNAZ 0.1","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":35144,"campaign_weekend_total":2434,"weekday_total":148,"weekend_total":332},{"product":"BATTICON 100","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":32735,"campaign_weekend_total":3213,"weekday_total":6673,"weekend_total":940},{"product":"BATTICON 30","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":30882,"campaign_weekend_total":1763,"weekday_total":3608,"weekend_total":801},{"product":"BIZMOPEN","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":25171,"campaign_weekend_total":1479,"weekday_total":10269,"weekend_total":2183},{"product":"DOLGIT","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":160322,"campaign_weekend_total":9953,"weekday_total":45429,"weekend_total":7940},{"product":"LODINE","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":29604,"campaign_weekend_total":1638,"weekday_total":12837,"weekend_total":2130},{"product":"OXYNAZ 0.5","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":43281,"campaign_weekend_total":2214,"weekday_total":113,"weekend_total":752},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":74640,"campaign_weekend_total":4364,"weekday_total":18121,"weekend_total":3904}],"2025-04":[{"product":"FSD","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":322490,"campaign_weekend_total":12511,"weekday_total":57539,"weekend_total":3759},{"product":"GFS","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":174738,"campaign_weekend_total":9144,"weekday_total":38974,"weekend_total":3438},{"product":"FS B  ŞURUP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":35380,"campaign_weekend_total":1893,"weekday_total":12374,"weekend_total":1056},{"product":"NADIXA","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":30569,"campaign_weekend_total":1599,"weekday_total":9042,"weekend_total":823},{"product":"ZALAIN CREAM","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":84040,"campaign_weekend_total":3149,"weekday_total":23467,"weekend_total":1993},{"product":"OXYNAZ 0.1","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":26924,"campaign_weekend_total":2621,"weekday_total":1030,"weekend_total":0},{"product":"BATTICON 100","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":44706,"campaign_weekend_total":2597,"weekday_total":8570,"weekend_total":1062},{"product":"BATTICON 30","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":39612,"campaign_weekend_total":1798,"weekday_total":8007,"weekend_total":723},{"product":"BIZMOPEN","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":30088,"campaign_weekend_total":1713,"weekday_total":4509,"weekend_total":387},{"product":"DOLGIT","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":249544,"campaign_weekend_total":11243,"weekday_total":25349,"weekend_total":1470},{"product":"LODINE","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":34253,"campaign_weekend_total":1113,"weekday_total":12383,"weekend_total":1027},{"product":"OXYNAZ 0.5","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":48360,"campaign_weekend_total":4892,"weekday_total":761,"weekend_total":0},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":110018,"campaign_weekend_total":5623,"weekday_total":11302,"weekend_total":706}],"2025-05":[{"product":"FSD","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":346918,"campaign_weekend_total":4682,"weekday_total":114883,"weekend_total":11835},{"product":"BIZMOPEN","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":20112,"campaign_weekend_total":430,"weekday_total":15817,"weekend_total":2080},{"product":"GFS","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":141962,"campaign_weekend_total":8326,"weekday_total":56538,"weekend_total":8124},{"product":"FS B  ŞURUP","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":33746,"campaign_weekend_total":605,"weekday_total":23401,"weekend_total":2906},{"product":"NADIXA","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":23423,"campaign_weekend_total":496,"weekday_total":14717,"weekend_total":2273},{"product":"ZALAIN CREAM","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":77937,"campaign_weekend_total":1318,"weekday_total":41967,"weekend_total":4934},{"product":"OXYNAZ 0.1","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":21526,"campaign_weekend_total":2129,"weekday_total":159,"weekend_total":0},{"product":"BATTICON 100","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":52368,"campaign_weekend_total":6479,"weekday_total":290,"weekend_total":0},{"product":"BATTICON 30","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":43995,"campaign_weekend_total":5010,"weekday_total":313,"weekend_total":0},{"product":"DOLGIT","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":192997,"campaign_weekend_total":3264,"weekday_total":91060,"weekend_total":9780},{"product":"LODINE","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":27567,"campaign_weekend_total":566,"weekday_total":21389,"weekend_total":2433},{"product":"OXYNAZ 0.5","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":28458,"campaign_weekend_total":2898,"weekday_total":343,"weekend_total":0},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":187723,"campaign_weekend_total":13670,"weekday_total":1102,"weekend_total":0}],"2025-06":[{"product":"FSD","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":377771,"campaign_weekend_total":11740,"weekday_total":58280,"weekend_total":6589},{"product":"BIZMOPEN","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":26573,"campaign_weekend_total":1251,"weekday_total":7814,"weekend_total":1042},{"product":"GFS","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":229482,"campaign_weekend_total":7727,"weekday_total":34513,"weekend_total":5621},{"product":"FS B  ŞURUP","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":41503,"campaign_weekend_total":1504,"weekday_total":11177,"weekend_total":1154},{"product":"NADIXA","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":29299,"campaign_weekend_total":946,"weekday_total":7183,"weekend_total":751},{"product":"ZALAIN CREAM","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":95945,"campaign_weekend_total":3802,"weekday_total":24223,"weekend_total":2747},{"product":"OXYNAZ 0.1","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":12771,"campaign_weekend_total":924,"weekday_total":132,"weekend_total":130},{"product":"BATTICON 100","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":51321,"campaign_weekend_total":3539,"weekday_total":12840,"weekend_total":1988},{"product":"BATTICON 30","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":45139,"campaign_weekend_total":3413,"weekday_total":10822,"weekend_total":2774},{"product":"DOLGIT","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":236239,"campaign_weekend_total":8596,"weekday_total":44918,"weekend_total":5571},{"product":"LODINE","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":34928,"campaign_weekend_total":1026,"weekday_total":10338,"weekend_total":1510},{"product":"OXYNAZ 0.5","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":12495,"campaign_weekend_total":253,"weekday_total":3602,"weekend_total":160},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":218890,"campaign_weekend_total":10898,"weekday_total":15735,"weekend_total":1460}],"2025-07":[{"product":"FSD","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":343272,"campaign_weekend_total":19748,"weekday_total":130442,"weekend_total":2921},{"product":"BIZMOPEN","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":22473,"campaign_weekend_total":2121,"weekday_total":16546,"weekend_total":622},{"product":"GFS","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":171582,"campaign_weekend_total":11251,"weekday_total":71681,"weekend_total":2064},{"product":"FS B  ŞURUP","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":36483,"campaign_weekend_total":2419,"weekday_total":24918,"weekend_total":600},{"product":"NADIXA","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":23997,"campaign_weekend_total":1844,"weekday_total":14768,"weekend_total":427},{"product":"ZALAIN CREAM","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":88659,"campaign_weekend_total":6698,"weekday_total":49369,"weekend_total":1380},{"product":"OXYNAZ 0.1","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":10569,"campaign_weekend_total":1385,"weekday_total":1052,"weekend_total":0},{"product":"BATTICON 100","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":45516,"campaign_weekend_total":4610,"weekday_total":14820,"weekend_total":1173},{"product":"BATTICON 30","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":52705,"campaign_weekend_total":6914,"weekday_total":17286,"weekend_total":1040},{"product":"DOLGIT","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":194396,"campaign_weekend_total":13454,"weekday_total":90459,"weekend_total":2260},{"product":"LODINE","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":27107,"campaign_weekend_total":2077,"weekday_total":21653,"weekend_total":521},{"product":"OXYNAZ 0.5","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":11850,"campaign_weekend_total":884,"weekday_total":4792,"weekend_total":616},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":225056,"campaign_weekend_total":17117,"weekday_total":34816,"weekend_total":0}],"2025-08":[{"product":"FSD","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":416585,"campaign_weekend_total":36499,"weekday_total":108963,"weekend_total":0},{"product":"BIZMOPEN","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":26544,"campaign_weekend_total":3025,"weekday_total":12877,"weekend_total":0},{"product":"GFS","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":198632,"campaign_weekend_total":21782,"weekday_total":52322,"weekend_total":0},{"product":"FS B  ŞURUP","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":49486,"campaign_weekend_total":4858,"weekday_total":20391,"weekend_total":0},{"product":"NADIXA","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":30608,"campaign_weekend_total":2826,"weekday_total":11660,"weekend_total":0},{"product":"ZALAIN CREAM","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":104857,"campaign_weekend_total":10785,"weekday_total":41523,"weekend_total":0},{"product":"OXYNAZ 0.1","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":12024,"campaign_weekend_total":1144,"weekday_total":3456,"weekend_total":0},{"product":"BATTICON 100","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":64265,"campaign_weekend_total":12399,"weekday_total":29329,"weekend_total":0},{"product":"BATTICON 30","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":27755,"campaign_weekend_total":5644,"weekday_total":11306,"weekend_total":0},{"product":"DOLGIT","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":240714,"campaign_weekend_total":21230,"weekday_total":64697,"weekend_total":0},{"product":"LODINE","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":33577,"campaign_weekend_total":3156,"weekday_total":16465,"weekend_total":0},{"product":"OXYNAZ 0.5","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":22713,"campaign_weekend_total":3020,"weekday_total":7287,"weekend_total":0},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":193965,"campaign_weekend_total":20420,"weekday_total":80077,"weekend_total":0}],"2025-09":[{"product":"FSD","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":475452,"campaign_weekend_total":17790,"weekday_total":200464,"weekend_total":7284},{"product":"BIZMOPEN","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":25913,"campaign_weekend_total":1687,"weekday_total":21107,"weekend_total":1166},{"product":"GFS","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":227331,"campaign_weekend_total":9873,"weekday_total":99615,"weekend_total":6628},{"product":"FS B  ŞURUP","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":42942,"campaign_weekend_total":2015,"weekday_total":30841,"weekend_total":1601},{"product":"NADIXA","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":27088,"campaign_weekend_total":1549,"weekday_total":18638,"weekend_total":840},{"product":"ZALAIN CREAM","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":64170,"campaign_weekend_total":4251,"weekday_total":43801,"weekend_total":717},{"product":"OXYNAZ 0.1","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":44574,"campaign_weekend_total":2061,"weekday_total":355,"weekend_total":407},{"product":"BATTICON 100","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":52088,"campaign_weekend_total":3123,"weekday_total":935,"weekend_total":23},{"product":"BATTICON 30","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":89604,"campaign_weekend_total":5497,"weekday_total":1363,"weekend_total":239},{"product":"DOLGIT","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":264812,"campaign_weekend_total":10161,"weekday_total":126619,"weekend_total":4480},{"product":"LODINE","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":33196,"campaign_weekend_total":1214,"weekday_total":27705,"weekend_total":1331},{"product":"OXYNAZ 0.5","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":50391,"campaign_weekend_total":2177,"weekday_total":1017,"weekend_total":123},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":307319,"campaign_weekend_total":12784,"weekday_total":7828,"weekend_total":2032}],"2025-10":[{"product":"FSD","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":311821,"campaign_weekend_total":17137,"weekday_total":198591,"weekend_total":14251},{"product":"BIZMOPEN","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":21525,"campaign_weekend_total":1202,"weekday_total":22369,"weekend_total":1761},{"product":"GFS","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":164400,"campaign_weekend_total":9217,"weekday_total":100956,"weekend_total":7631},{"product":"FS B  ŞURUP","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":23107,"campaign_weekend_total":1441,"weekday_total":23123,"weekend_total":1368},{"product":"NADIXA","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":14773,"campaign_weekend_total":1266,"weekday_total":15180,"weekend_total":1095},{"product":"ZALAIN CREAM","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":82857,"campaign_weekend_total":4551,"weekday_total":96985,"weekend_total":8766},{"product":"OXYNAZ 0.1","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":39695,"campaign_weekend_total":1885,"weekday_total":403,"weekend_total":1134},{"product":"BATTICON 100","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":79145,"campaign_weekend_total":2292,"weekday_total":1212,"weekend_total":1774},{"product":"BATTICON 30","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":27027,"campaign_weekend_total":1331,"weekday_total":281,"weekend_total":382},{"product":"DOLGIT","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":178271,"campaign_weekend_total":7779,"weekday_total":100879,"weekend_total":6520},{"product":"LODINE","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":37891,"campaign_weekend_total":2254,"weekday_total":30068,"weekend_total":2395},{"product":"OXYNAZ 0.5","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":57252,"campaign_weekend_total":2348,"weekday_total":166,"weekend_total":927},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":253221,"campaign_weekend_total":13614,"weekday_total":3652,"weekend_total":3517}],"2025-11":[{"product":"FSD","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":344386,"campaign_weekend_total":3709,"weekday_total":87943,"weekend_total":19618},{"product":"BIZMOPEN","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":24531,"campaign_weekend_total":1018,"weekday_total":8603,"weekend_total":2039},{"product":"GFS","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":181433,"campaign_weekend_total":2390,"weekday_total":48118,"weekend_total":12933},{"product":"FS B  ŞURUP","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":43364,"campaign_weekend_total":1033,"weekday_total":12225,"weekend_total":2601},{"product":"NADIXA","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":1430,"campaign_weekend_total":0,"weekday_total":1747,"weekend_total":435},{"product":"ZALAIN CREAM","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":100234,"campaign_weekend_total":1468,"weekday_total":30457,"weekend_total":7882},{"product":"OXYNAZ 0.1","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":26097,"campaign_weekend_total":282,"weekday_total":668,"weekend_total":1222},{"product":"BATTICON 100","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":87677,"campaign_weekend_total":1727,"weekday_total":2036,"weekend_total":3140},{"product":"BATTICON 30","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":68424,"campaign_weekend_total":1367,"weekday_total":200,"weekend_total":2259},{"product":"DOLGIT","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":268281,"campaign_weekend_total":3715,"weekday_total":75249,"weekend_total":15921},{"product":"LODINE","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":42590,"campaign_weekend_total":1048,"weekday_total":20778,"weekend_total":3910},{"product":"OXYNAZ 0.5","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":55176,"campaign_weekend_total":1070,"weekday_total":760,"weekend_total":986},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":212793,"campaign_weekend_total":4344,"weekday_total":17388,"weekend_total":7804}],"2025-12":[{"product":"FSD","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":360644,"campaign_weekend_total":11945,"weekday_total":187749,"weekend_total":8969},{"product":"BIZMOPEN","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":22498,"campaign_weekend_total":470,"weekday_total":5800,"weekend_total":177},{"product":"GFS","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":203166,"campaign_weekend_total":10530,"weekday_total":90481,"weekend_total":6619},{"product":"FS B  ŞURUP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":56845,"campaign_weekend_total":1635,"weekday_total":11766,"weekend_total":1834},{"product":"ZALAIN CREAM","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":89797,"campaign_weekend_total":3271,"weekday_total":50469,"weekend_total":3174},{"product":"OXYNAZ 0.1","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":56775,"campaign_weekend_total":2454,"weekday_total":3541,"weekend_total":871},{"product":"BATTICON 100","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":84019,"campaign_weekend_total":2689,"weekday_total":4326,"weekend_total":812},{"product":"BATTICON 30","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":59126,"campaign_weekend_total":2230,"weekday_total":3101,"weekend_total":1016},{"product":"DOLGIT","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":236348,"campaign_weekend_total":7675,"weekday_total":104718,"weekend_total":4847},{"product":"LODINE","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":43630,"campaign_weekend_total":1864,"weekday_total":30517,"weekend_total":1940},{"product":"OXYNAZ 0.5","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":58141,"campaign_weekend_total":2362,"weekday_total":2888,"weekend_total":399},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":219397,"campaign_weekend_total":6575,"weekday_total":36146,"weekend_total":3884}]},"2026":{"2026-01":[{"product":"FSD","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":455464,"campaign_weekend_total":25828,"weekday_total":114473,"weekend_total":14382},{"product":"BIZMOPEN","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":31569,"campaign_weekend_total":1365,"weekday_total":14828,"weekend_total":2065},{"product":"GFS","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":171140,"campaign_weekend_total":9619,"weekday_total":45112,"weekend_total":6453},{"product":"FS B  ŞURUP","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":39076,"campaign_weekend_total":1819,"weekday_total":18430,"weekend_total":2335},{"product":"ZALAIN CREAM","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":89902,"campaign_weekend_total":4954,"weekday_total":31105,"weekend_total":3803},{"product":"OXYNAZ 0.1","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":42263,"campaign_weekend_total":2229,"weekday_total":2751,"weekend_total":1667},{"product":"BATTICON 100","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":42392,"campaign_weekend_total":2861,"weekday_total":1799,"weekend_total":1056},{"product":"BATTICON 30","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":35472,"campaign_weekend_total":2227,"weekday_total":1353,"weekend_total":1054},{"product":"DOLGIT","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":234465,"campaign_weekend_total":14233,"weekday_total":65130,"weekend_total":6407},{"product":"LODINE","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":47344,"campaign_weekend_total":2282,"weekday_total":5765,"weekend_total":1893},{"product":"OXYNAZ 0.5","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":43030,"campaign_weekend_total":1733,"weekday_total":1937,"weekend_total":392},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":238496,"campaign_weekend_total":10677,"weekday_total":16842,"weekend_total":6299}],"2026-02":[{"product":"FSD","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":440376,"campaign_weekend_total":11421,"weekday_total":259403,"weekend_total":19719},{"product":"BIZMOPEN","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":23805,"campaign_weekend_total":682,"weekday_total":19216,"weekend_total":2098},{"product":"GFS","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":153217,"campaign_weekend_total":6741,"weekday_total":77136,"weekend_total":8383},{"product":"FS B  ŞURUP","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":28114,"campaign_weekend_total":859,"weekday_total":22543,"weekend_total":2549},{"product":"ZALAIN CREAM","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":81366,"campaign_weekend_total":2495,"weekday_total":44369,"weekend_total":5020},{"product":"OXYNAZ 0.1","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":29808,"campaign_weekend_total":1738,"weekday_total":631,"weekend_total":784},{"product":"BATTICON 100","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":70549,"campaign_weekend_total":2943,"weekday_total":1201,"weekend_total":645},{"product":"BATTICON 30","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":56206,"campaign_weekend_total":3072,"weekday_total":981,"weekend_total":756},{"product":"DOLGIT","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":191701,"campaign_weekend_total":5433,"weekday_total":105910,"weekend_total":8046},{"product":"LODINE","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":61713,"campaign_weekend_total":2014,"weekday_total":1758,"weekend_total":1227},{"product":"OXYNAZ 0.5","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":31637,"campaign_weekend_total":1504,"weekday_total":712,"weekend_total":379},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":249927,"campaign_weekend_total":8687,"weekday_total":5673,"weekend_total":4376}]}};
+const SALES_DATA = {"2025":{"2025-01":[{"product":"FSD","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":290005,"campaign_weekend_total":11442,"weekday_total":75954,"weekend_total":4595},{"product":"GFS","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":154743,"campaign_weekend_total":8548,"weekday_total":53489,"weekend_total":4376},{"product":"FS B  ŞURUP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":28233,"campaign_weekend_total":922,"weekday_total":27648,"weekend_total":1986},{"product":"NADIXA","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":30702,"campaign_weekend_total":1314,"weekday_total":12984,"weekend_total":936},{"product":"ZALAIN CREAM","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":85511,"campaign_weekend_total":3372,"weekday_total":38857,"weekend_total":2778},{"product":"OXYNAZ 0.1","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":40818,"campaign_weekend_total":2700,"weekday_total":2578,"weekend_total":1128},{"product":"ZOFER 4 MG","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":0,"campaign_weekend_total":0,"weekday_total":10218,"weekend_total":1358},{"product":"DOLGIT","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":198461,"campaign_weekend_total":10579,"weekday_total":68905,"weekend_total":4229},{"product":"LODINE","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":36174,"campaign_weekend_total":1779,"weekday_total":21450,"weekend_total":1504},{"product":"BATTICON 100","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":33777,"campaign_weekend_total":2903,"weekday_total":7203,"weekend_total":1270},{"product":"BATTICON 30","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":22966,"campaign_weekend_total":1766,"weekday_total":5825,"weekend_total":880},{"product":"BIZMOPEN","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":23170,"campaign_weekend_total":1196,"weekday_total":15569,"weekend_total":1150},{"product":"OXYNAZ 0.5","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":59804,"campaign_weekend_total":3568,"weekday_total":193,"weekend_total":109},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":81484,"campaign_weekend_total":3933,"weekday_total":30304,"weekend_total":2009}],"2025-02":[{"product":"FSD","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":321384,"campaign_weekend_total":26514,"weekday_total":48830,"weekend_total":24563},{"product":"GFS","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":166290,"campaign_weekend_total":15348,"weekday_total":34440,"weekend_total":14225},{"product":"FS B  ŞURUP","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":35150,"campaign_weekend_total":665,"weekday_total":17885,"weekend_total":4353},{"product":"NADIXA","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":32916,"campaign_weekend_total":832,"weekday_total":10486,"weekend_total":3798},{"product":"ZALAIN CREAM","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":95234,"campaign_weekend_total":7929,"weekday_total":21345,"weekend_total":7928},{"product":"OXYNAZ 0.1","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":41509,"campaign_weekend_total":5232,"weekday_total":373,"weekend_total":314},{"product":"BATTICON 100","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":56533,"campaign_weekend_total":3515,"weekday_total":5788,"weekend_total":10591},{"product":"BATTICON 30","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":41572,"campaign_weekend_total":5323,"weekday_total":5480,"weekend_total":11616},{"product":"BIZMOPEN","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":26500,"campaign_weekend_total":1362,"weekday_total":9041,"weekend_total":2137},{"product":"DOLGIT","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":200677,"campaign_weekend_total":26232,"weekday_total":51661,"weekend_total":22955},{"product":"LODINE","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":34803,"campaign_weekend_total":2426,"weekday_total":11516,"weekend_total":2707},{"product":"OXYNAZ 0.5","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":53364,"campaign_weekend_total":5917,"weekday_total":392,"weekend_total":211},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":5,"weekend_days":4,"campaign_weekday_total":88334,"campaign_weekend_total":7468,"weekday_total":18155,"weekend_total":6713}],"2025-03":[{"product":"FSD","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":268592,"campaign_weekend_total":12179,"weekday_total":50655,"weekend_total":13083},{"product":"GFS","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":138087,"campaign_weekend_total":8255,"weekday_total":35199,"weekend_total":9255},{"product":"FS B  ŞURUP","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":32630,"campaign_weekend_total":1792,"weekday_total":11960,"weekend_total":2671},{"product":"NADIXA","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":30066,"campaign_weekend_total":2057,"weekday_total":9077,"weekend_total":2149},{"product":"ZALAIN CREAM","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":79935,"campaign_weekend_total":4268,"weekday_total":23353,"weekend_total":4900},{"product":"OXYNAZ 0.1","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":35144,"campaign_weekend_total":2434,"weekday_total":148,"weekend_total":332},{"product":"BATTICON 100","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":32735,"campaign_weekend_total":3213,"weekday_total":6673,"weekend_total":940},{"product":"BATTICON 30","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":30882,"campaign_weekend_total":1763,"weekday_total":3608,"weekend_total":801},{"product":"BIZMOPEN","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":25171,"campaign_weekend_total":1479,"weekday_total":10269,"weekend_total":2183},{"product":"DOLGIT","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":160322,"campaign_weekend_total":9953,"weekday_total":45429,"weekend_total":7940},{"product":"LODINE","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":29604,"campaign_weekend_total":1638,"weekday_total":12837,"weekend_total":2130},{"product":"OXYNAZ 0.5","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":43281,"campaign_weekend_total":2214,"weekday_total":113,"weekend_total":752},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":14,"campaign_weekend_days":5,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":74640,"campaign_weekend_total":4364,"weekday_total":18121,"weekend_total":3904}],"2025-04":[{"product":"FSD","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":322490,"campaign_weekend_total":12511,"weekday_total":57539,"weekend_total":3759},{"product":"GFS","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":174738,"campaign_weekend_total":9144,"weekday_total":38974,"weekend_total":3438},{"product":"FS B  ŞURUP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":35380,"campaign_weekend_total":1893,"weekday_total":12374,"weekend_total":1056},{"product":"NADIXA","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":30569,"campaign_weekend_total":1599,"weekday_total":9042,"weekend_total":823},{"product":"ZALAIN CREAM","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":84040,"campaign_weekend_total":3149,"weekday_total":23467,"weekend_total":1993},{"product":"OXYNAZ 0.1","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":26924,"campaign_weekend_total":2621,"weekday_total":1030,"weekend_total":0},{"product":"BATTICON 100","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":44706,"campaign_weekend_total":2597,"weekday_total":8570,"weekend_total":1062},{"product":"BATTICON 30","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":39612,"campaign_weekend_total":1798,"weekday_total":8007,"weekend_total":723},{"product":"BIZMOPEN","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":30088,"campaign_weekend_total":1713,"weekday_total":4509,"weekend_total":387},{"product":"DOLGIT","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":249544,"campaign_weekend_total":11243,"weekday_total":25349,"weekend_total":1470},{"product":"LODINE","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":34253,"campaign_weekend_total":1113,"weekday_total":12383,"weekend_total":1027},{"product":"OXYNAZ 0.5","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":48360,"campaign_weekend_total":4892,"weekday_total":761,"weekend_total":0},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":9,"weekend_days":4,"campaign_weekday_total":110018,"campaign_weekend_total":5623,"weekday_total":11302,"weekend_total":706}],"2025-05":[{"product":"FSD","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":346918,"campaign_weekend_total":4682,"weekday_total":114883,"weekend_total":11835},{"product":"BIZMOPEN","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":20112,"campaign_weekend_total":430,"weekday_total":15817,"weekend_total":2080},{"product":"GFS","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":141962,"campaign_weekend_total":8326,"weekday_total":56538,"weekend_total":8124},{"product":"FS B  ŞURUP","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":33746,"campaign_weekend_total":605,"weekday_total":23401,"weekend_total":2906},{"product":"NADIXA","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":23423,"campaign_weekend_total":496,"weekday_total":14717,"weekend_total":2273},{"product":"ZALAIN CREAM","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":77937,"campaign_weekend_total":1318,"weekday_total":41967,"weekend_total":4934},{"product":"OXYNAZ 0.1","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":21526,"campaign_weekend_total":2129,"weekday_total":159,"weekend_total":0},{"product":"BATTICON 100","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":52368,"campaign_weekend_total":6479,"weekday_total":290,"weekend_total":0},{"product":"BATTICON 30","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":43995,"campaign_weekend_total":5010,"weekday_total":313,"weekend_total":0},{"product":"DOLGIT","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":192997,"campaign_weekend_total":3264,"weekday_total":91060,"weekend_total":9780},{"product":"LODINE","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":27567,"campaign_weekend_total":566,"weekday_total":21389,"weekend_total":2433},{"product":"OXYNAZ 0.5","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":28458,"campaign_weekend_total":2898,"weekday_total":343,"weekend_total":0},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":11,"campaign_weekend_days":1,"weekday_days":11,"weekend_days":8,"campaign_weekday_total":187723,"campaign_weekend_total":13670,"weekday_total":1102,"weekend_total":0}],"2025-06":[{"product":"FSD","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":377771,"campaign_weekend_total":11740,"weekday_total":58280,"weekend_total":6589},{"product":"BIZMOPEN","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":26573,"campaign_weekend_total":1251,"weekday_total":7814,"weekend_total":1042},{"product":"GFS","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":229482,"campaign_weekend_total":7727,"weekday_total":34513,"weekend_total":5621},{"product":"FS B  ŞURUP","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":41503,"campaign_weekend_total":1504,"weekday_total":11177,"weekend_total":1154},{"product":"NADIXA","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":29299,"campaign_weekend_total":946,"weekday_total":7183,"weekend_total":751},{"product":"ZALAIN CREAM","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":95945,"campaign_weekend_total":3802,"weekday_total":24223,"weekend_total":2747},{"product":"OXYNAZ 0.1","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":12771,"campaign_weekend_total":924,"weekday_total":132,"weekend_total":130},{"product":"BATTICON 100","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":51321,"campaign_weekend_total":3539,"weekday_total":12840,"weekend_total":1988},{"product":"BATTICON 30","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":45139,"campaign_weekend_total":3413,"weekday_total":10822,"weekend_total":2774},{"product":"DOLGIT","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":236239,"campaign_weekend_total":8596,"weekday_total":44918,"weekend_total":5571},{"product":"LODINE","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":34928,"campaign_weekend_total":1026,"weekday_total":10338,"weekend_total":1510},{"product":"OXYNAZ 0.5","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":12495,"campaign_weekend_total":253,"weekday_total":3602,"weekend_total":160},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":14,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":5,"campaign_weekday_total":218890,"campaign_weekend_total":10898,"weekday_total":15735,"weekend_total":1460}],"2025-07":[{"product":"FSD","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":343272,"campaign_weekend_total":19748,"weekday_total":130442,"weekend_total":2921},{"product":"BIZMOPEN","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":22473,"campaign_weekend_total":2121,"weekday_total":16546,"weekend_total":622},{"product":"GFS","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":171582,"campaign_weekend_total":11251,"weekday_total":71681,"weekend_total":2064},{"product":"FS B  ŞURUP","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":36483,"campaign_weekend_total":2419,"weekday_total":24918,"weekend_total":600},{"product":"NADIXA","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":23997,"campaign_weekend_total":1844,"weekday_total":14768,"weekend_total":427},{"product":"ZALAIN CREAM","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":88659,"campaign_weekend_total":6698,"weekday_total":49369,"weekend_total":1380},{"product":"OXYNAZ 0.1","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":10569,"campaign_weekend_total":1385,"weekday_total":1052,"weekend_total":0},{"product":"BATTICON 100","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":45516,"campaign_weekend_total":4610,"weekday_total":14820,"weekend_total":1173},{"product":"BATTICON 30","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":52705,"campaign_weekend_total":6914,"weekday_total":17286,"weekend_total":1040},{"product":"DOLGIT","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":194396,"campaign_weekend_total":13454,"weekday_total":90459,"weekend_total":2260},{"product":"LODINE","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":27107,"campaign_weekend_total":2077,"weekday_total":21653,"weekend_total":521},{"product":"OXYNAZ 0.5","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":11850,"campaign_weekend_total":884,"weekday_total":4792,"weekend_total":616},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":12,"campaign_weekend_days":6,"weekday_days":11,"weekend_days":2,"campaign_weekday_total":225056,"campaign_weekend_total":17117,"weekday_total":34816,"weekend_total":0}],"2025-08":[{"product":"FSD","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":416585,"campaign_weekend_total":36499,"weekday_total":108963,"weekend_total":0},{"product":"BIZMOPEN","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":26544,"campaign_weekend_total":3025,"weekday_total":12877,"weekend_total":0},{"product":"GFS","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":198632,"campaign_weekend_total":21782,"weekday_total":52322,"weekend_total":0},{"product":"FS B  ŞURUP","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":49486,"campaign_weekend_total":4858,"weekday_total":20391,"weekend_total":0},{"product":"NADIXA","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":30608,"campaign_weekend_total":2826,"weekday_total":11660,"weekend_total":0},{"product":"ZALAIN CREAM","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":104857,"campaign_weekend_total":10785,"weekday_total":41523,"weekend_total":0},{"product":"OXYNAZ 0.1","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":12024,"campaign_weekend_total":1144,"weekday_total":3456,"weekend_total":0},{"product":"BATTICON 100","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":64265,"campaign_weekend_total":12399,"weekday_total":29329,"weekend_total":0},{"product":"BATTICON 30","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":27755,"campaign_weekend_total":5644,"weekday_total":11306,"weekend_total":0},{"product":"DOLGIT","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":240714,"campaign_weekend_total":21230,"weekday_total":64697,"weekend_total":0},{"product":"LODINE","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":33577,"campaign_weekend_total":3156,"weekday_total":16465,"weekend_total":0},{"product":"OXYNAZ 0.5","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":22713,"campaign_weekend_total":3020,"weekday_total":7287,"weekend_total":0},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":13,"campaign_weekend_days":10,"weekday_days":8,"weekend_days":0,"campaign_weekday_total":193965,"campaign_weekend_total":20420,"weekday_total":80077,"weekend_total":0}],"2025-09":[{"product":"FSD","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":475452,"campaign_weekend_total":17790,"weekday_total":200464,"weekend_total":7284},{"product":"BIZMOPEN","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":25913,"campaign_weekend_total":1687,"weekday_total":21107,"weekend_total":1166},{"product":"GFS","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":227331,"campaign_weekend_total":9873,"weekday_total":99615,"weekend_total":6628},{"product":"FS B  ŞURUP","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":42942,"campaign_weekend_total":2015,"weekday_total":30841,"weekend_total":1601},{"product":"NADIXA","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":27088,"campaign_weekend_total":1549,"weekday_total":18638,"weekend_total":840},{"product":"ZALAIN CREAM","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":64170,"campaign_weekend_total":4251,"weekday_total":43801,"weekend_total":717},{"product":"OXYNAZ 0.1","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":44574,"campaign_weekend_total":2061,"weekday_total":355,"weekend_total":407},{"product":"BATTICON 100","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":52088,"campaign_weekend_total":3123,"weekday_total":935,"weekend_total":23},{"product":"BATTICON 30","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":89604,"campaign_weekend_total":5497,"weekday_total":1363,"weekend_total":239},{"product":"DOLGIT","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":264812,"campaign_weekend_total":10161,"weekday_total":126619,"weekend_total":4480},{"product":"LODINE","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":33196,"campaign_weekend_total":1214,"weekday_total":27705,"weekend_total":1331},{"product":"OXYNAZ 0.5","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":50391,"campaign_weekend_total":2177,"weekday_total":1017,"weekend_total":123},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":11,"campaign_weekend_days":4,"weekday_days":11,"weekend_days":4,"campaign_weekday_total":307319,"campaign_weekend_total":12784,"weekday_total":7828,"weekend_total":2032}],"2025-10":[{"product":"FSD","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":311821,"campaign_weekend_total":17137,"weekday_total":198591,"weekend_total":14251},{"product":"BIZMOPEN","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":21525,"campaign_weekend_total":1202,"weekday_total":22369,"weekend_total":1761},{"product":"GFS","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":164400,"campaign_weekend_total":9217,"weekday_total":100956,"weekend_total":7631},{"product":"FS B  ŞURUP","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":23107,"campaign_weekend_total":1441,"weekday_total":23123,"weekend_total":1368},{"product":"NADIXA","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":14773,"campaign_weekend_total":1266,"weekday_total":15180,"weekend_total":1095},{"product":"ZALAIN CREAM","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":82857,"campaign_weekend_total":4551,"weekday_total":96985,"weekend_total":8766},{"product":"OXYNAZ 0.1","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":39695,"campaign_weekend_total":1885,"weekday_total":403,"weekend_total":1134},{"product":"BATTICON 100","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":79145,"campaign_weekend_total":2292,"weekday_total":1212,"weekend_total":1774},{"product":"BATTICON 30","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":27027,"campaign_weekend_total":1331,"weekday_total":281,"weekend_total":382},{"product":"DOLGIT","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":178271,"campaign_weekend_total":7779,"weekday_total":100879,"weekend_total":6520},{"product":"LODINE","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":37891,"campaign_weekend_total":2254,"weekday_total":30068,"weekend_total":2395},{"product":"OXYNAZ 0.5","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":57252,"campaign_weekend_total":2348,"weekday_total":166,"weekend_total":927},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":13,"weekend_days":6,"campaign_weekday_total":253221,"campaign_weekend_total":13614,"weekday_total":3652,"weekend_total":3517}],"2025-11":[{"product":"FSD","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":344386,"campaign_weekend_total":3709,"weekday_total":87943,"weekend_total":19618},{"product":"BIZMOPEN","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":24531,"campaign_weekend_total":1018,"weekday_total":8603,"weekend_total":2039},{"product":"GFS","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":181433,"campaign_weekend_total":2390,"weekday_total":48118,"weekend_total":12933},{"product":"FS B  ŞURUP","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":43364,"campaign_weekend_total":1033,"weekday_total":12225,"weekend_total":2601},{"product":"NADIXA","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":1430,"campaign_weekend_total":0,"weekday_total":1747,"weekend_total":435},{"product":"ZALAIN CREAM","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":100234,"campaign_weekend_total":1468,"weekday_total":30457,"weekend_total":7882},{"product":"OXYNAZ 0.1","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":26097,"campaign_weekend_total":282,"weekday_total":668,"weekend_total":1222},{"product":"BATTICON 100","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":87677,"campaign_weekend_total":1727,"weekday_total":2036,"weekend_total":3140},{"product":"BATTICON 30","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":68424,"campaign_weekend_total":1367,"weekday_total":200,"weekend_total":2259},{"product":"DOLGIT","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":268281,"campaign_weekend_total":3715,"weekday_total":75249,"weekend_total":15921},{"product":"LODINE","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":42590,"campaign_weekend_total":1048,"weekday_total":20778,"weekend_total":3910},{"product":"OXYNAZ 0.5","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":55176,"campaign_weekend_total":1070,"weekday_total":760,"weekend_total":986},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":13,"campaign_weekend_days":2,"weekday_days":7,"weekend_days":8,"campaign_weekday_total":212793,"campaign_weekend_total":4344,"weekday_total":17388,"weekend_total":7804}],"2025-12":[{"product":"FSD","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":360644,"campaign_weekend_total":11945,"weekday_total":187749,"weekend_total":8969},{"product":"BIZMOPEN","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":22498,"campaign_weekend_total":470,"weekday_total":5800,"weekend_total":177},{"product":"GFS","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":203166,"campaign_weekend_total":10530,"weekday_total":90481,"weekend_total":6619},{"product":"FS B  ŞURUP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":56845,"campaign_weekend_total":1635,"weekday_total":11766,"weekend_total":1834},{"product":"ZALAIN CREAM","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":89797,"campaign_weekend_total":3271,"weekday_total":50469,"weekend_total":3174},{"product":"OXYNAZ 0.1","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":56775,"campaign_weekend_total":2454,"weekday_total":3541,"weekend_total":871},{"product":"BATTICON 100","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":84019,"campaign_weekend_total":2689,"weekday_total":4326,"weekend_total":812},{"product":"BATTICON 30","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":59126,"campaign_weekend_total":2230,"weekday_total":3101,"weekend_total":1016},{"product":"DOLGIT","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":236348,"campaign_weekend_total":7675,"weekday_total":104718,"weekend_total":4847},{"product":"LODINE","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":43630,"campaign_weekend_total":1864,"weekday_total":30517,"weekend_total":1940},{"product":"OXYNAZ 0.5","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":58141,"campaign_weekend_total":2362,"weekday_total":2888,"weekend_total":399},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":13,"campaign_weekend_days":4,"weekday_days":10,"weekend_days":4,"campaign_weekday_total":219397,"campaign_weekend_total":6575,"weekday_total":36146,"weekend_total":3884}]},"2026":{"2026-01":[{"product":"FSD","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":455464,"campaign_weekend_total":25828,"weekday_total":114473,"weekend_total":14382},{"product":"BIZMOPEN","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":31569,"campaign_weekend_total":1365,"weekday_total":14828,"weekend_total":2065},{"product":"GFS","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":171140,"campaign_weekend_total":9619,"weekday_total":45112,"weekend_total":6453},{"product":"FS B  ŞURUP","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":39076,"campaign_weekend_total":1819,"weekday_total":18430,"weekend_total":2335},{"product":"ZALAIN CREAM","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":89902,"campaign_weekend_total":4954,"weekday_total":31105,"weekend_total":3803},{"product":"OXYNAZ 0.1","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":42263,"campaign_weekend_total":2229,"weekday_total":2751,"weekend_total":1667},{"product":"BATTICON 100","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":42392,"campaign_weekend_total":2861,"weekday_total":1799,"weekend_total":1056},{"product":"BATTICON 30","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":35472,"campaign_weekend_total":2227,"weekday_total":1353,"weekend_total":1054},{"product":"DOLGIT","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":234465,"campaign_weekend_total":14233,"weekday_total":65130,"weekend_total":6407},{"product":"LODINE","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":47344,"campaign_weekend_total":2282,"weekday_total":5765,"weekend_total":1893},{"product":"OXYNAZ 0.5","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":43030,"campaign_weekend_total":1733,"weekday_total":1937,"weekend_total":392},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":14,"campaign_weekend_days":3,"weekday_days":8,"weekend_days":6,"campaign_weekday_total":238496,"campaign_weekend_total":10677,"weekday_total":16842,"weekend_total":6299}],"2026-02":[{"product":"FSD","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":440376,"campaign_weekend_total":11421,"weekday_total":259403,"weekend_total":19719},{"product":"BIZMOPEN","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":23805,"campaign_weekend_total":682,"weekday_total":19216,"weekend_total":2098},{"product":"GFS","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":153217,"campaign_weekend_total":6741,"weekday_total":77136,"weekend_total":8383},{"product":"FS B  ŞURUP","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":28114,"campaign_weekend_total":859,"weekday_total":22543,"weekend_total":2549},{"product":"ZALAIN CREAM","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":81366,"campaign_weekend_total":2495,"weekday_total":44369,"weekend_total":5020},{"product":"OXYNAZ 0.1","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":29808,"campaign_weekend_total":1738,"weekday_total":631,"weekend_total":784},{"product":"BATTICON 100","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":70549,"campaign_weekend_total":2943,"weekday_total":1201,"weekend_total":645},{"product":"BATTICON 30","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":56206,"campaign_weekend_total":3072,"weekday_total":981,"weekend_total":756},{"product":"DOLGIT","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":191701,"campaign_weekend_total":5433,"weekday_total":105910,"weekend_total":8046},{"product":"LODINE","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":61713,"campaign_weekend_total":2014,"weekday_total":1758,"weekend_total":1227},{"product":"OXYNAZ 0.5","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":31637,"campaign_weekend_total":1504,"weekday_total":712,"weekend_total":379},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":10,"campaign_weekend_days":2,"weekday_days":10,"weekend_days":6,"campaign_weekday_total":249927,"campaign_weekend_total":8687,"weekday_total":5673,"weekend_total":4376}],"2026-03":[{"product":"FSD","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":303791,"campaign_weekend_total":0,"weekday_total":248711,"weekend_total":42464},{"product":"BIZMOPEN","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":19881,"campaign_weekend_total":0,"weekday_total":23452,"weekend_total":2342},{"product":"GFS","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":88368,"campaign_weekend_total":0,"weekday_total":132323,"weekend_total":20866},{"product":"FS B  ŞURUP","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":15267,"campaign_weekend_total":0,"weekday_total":29668,"weekend_total":2490},{"product":"ZALAIN CREAM","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":43435,"campaign_weekend_total":0,"weekday_total":73630,"weekend_total":9043},{"product":"OXYNAZ 0.1","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":34590,"campaign_weekend_total":0,"weekday_total":4622,"weekend_total":2224},{"product":"BATTICON 100","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":41453,"campaign_weekend_total":0,"weekday_total":8690,"weekend_total":10818},{"product":"BATTICON 30","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":34907,"campaign_weekend_total":0,"weekday_total":6853,"weekend_total":9294},{"product":"DOLGIT","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":134588,"campaign_weekend_total":0,"weekday_total":145943,"weekend_total":27731},{"product":"LODINE","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":27369,"campaign_weekend_total":0,"weekday_total":24252,"weekend_total":3418},{"product":"OXYNAZ 0.5","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":34547,"campaign_weekend_total":0,"weekday_total":8389,"weekend_total":2002},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":9,"campaign_weekend_days":0,"weekday_days":13,"weekend_days":9,"campaign_weekday_total":191583,"campaign_weekend_total":0,"weekday_total":44966,"weekend_total":17839}],"2026-04":[{"product":"FSD","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":407666,"campaign_weekend_total":14898,"weekday_total":96286,"weekend_total":6437},{"product":"BIZMOPEN","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":6447,"campaign_weekend_total":635,"weekday_total":32540,"weekend_total":1830},{"product":"GFS","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":167539,"campaign_weekend_total":9086,"weekday_total":62884,"weekend_total":4827},{"product":"FS B  ŞURUP","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":28056,"campaign_weekend_total":1542,"weekday_total":23997,"weekend_total":1154},{"product":"ZALAIN CREAM","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":66919,"campaign_weekend_total":4396,"weekday_total":56468,"weekend_total":2423},{"product":"OXYNAZ 0.1","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":20807,"campaign_weekend_total":1311,"weekday_total":6309,"weekend_total":429},{"product":"ZOFER 4MG","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":5234,"campaign_weekend_total":381,"weekday_total":6209,"weekend_total":1233},{"product":"BATTICON 100","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":52762,"campaign_weekend_total":3282,"weekday_total":1578,"weekend_total":5702},{"product":"BATTICON 30","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":44459,"campaign_weekend_total":2256,"weekday_total":1454,"weekend_total":4208},{"product":"DOLGIT","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":225915,"campaign_weekend_total":7100,"weekday_total":33438,"weekend_total":3321},{"product":"LODINE","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":37944,"campaign_weekend_total":1209,"weekday_total":13161,"weekend_total":1173},{"product":"OXYNAZ 0.5","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":25637,"campaign_weekend_total":414,"weekday_total":1574,"weekend_total":210},{"product":"ZEDPREX 24 CAP","campaign_weekday_days":15,"campaign_weekend_days":4,"weekday_days":7,"weekend_days":4,"campaign_weekday_total":198003,"campaign_weekend_total":6552,"weekday_total":11313,"weekend_total":3068}]}};
 
 const MONTHS_TR = ['','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 const PRODUCT_COLORS = ['#2563b0','#f472b6','#10b981','#f59e0b','#8b5cf6','#ef4444','#06b6d4','#84cc16','#f97316','#ec4899','#14b8a6','#a855f7','#64748b','#dc2626'];
@@ -322,29 +254,27 @@ let charts = {};
 
 function fmt(n) { return (n||n===0) ? n.toLocaleString('tr-TR') : '-'; }
 function getYearData(year) { return SALES_DATA[year] || {}; }
-function getMonths(year) { return Object.keys(getYearData(year)).sort(); }
-function getDayType() { return document.getElementById('dayTypeSel').value; }
+function getMonths(year)   { return Object.keys(getYearData(year)).sort(); }
+function getDayType()      { return document.getElementById('dayTypeSel').value; }
 
-// For each product, derive convenient aggregated fields
 function enrich(p) {
-  p.campaign_total   = p.campaign_weekday_total + p.campaign_weekend_total;
-  p.campaign_days    = p.campaign_weekday_days  + p.campaign_weekend_days;
-  p.non_campaign_total = p.weekday_total + p.weekend_total;
-  p.non_campaign_days  = p.weekday_days  + p.weekend_days;
-  p.total            = p.campaign_total + p.non_campaign_total;
-  p.total_days       = p.campaign_days  + p.non_campaign_days;
+  p.campaign_total      = p.campaign_weekday_total + p.campaign_weekend_total;
+  p.campaign_days       = p.campaign_weekday_days  + p.campaign_weekend_days;
+  p.non_campaign_total  = p.weekday_total + p.weekend_total;
+  p.non_campaign_days   = p.weekday_days  + p.weekend_days;
+  p.total               = p.campaign_total + p.non_campaign_total;
+  p.total_days          = p.campaign_days  + p.non_campaign_days;
   return p;
 }
 
-// Returns {sales, days, label, color} for a product given dayType
 function getSlice(p, dayType) {
   switch(dayType) {
-    case 'campaign_weekday': return { sales: p.campaign_weekday_total, days: p.campaign_weekday_days, label: 'Hafta İçi Kampanyalı', color: '#f472b6' };
-    case 'campaign_weekend': return { sales: p.campaign_weekend_total, days: p.campaign_weekend_days, label: 'Hafta Sonu Kampanyalı', color: '#a855f7' };
-    case 'campaign':         return { sales: p.campaign_total,         days: p.campaign_days,         label: 'Tüm Kampanyalı',       color: '#f97316' };
+    case 'campaign_weekday': return { sales: p.campaign_weekday_total, days: p.campaign_weekday_days, label: 'Hafta İçi Kampanyalı',    color: '#f472b6' };
+    case 'campaign_weekend': return { sales: p.campaign_weekend_total, days: p.campaign_weekend_days, label: 'Hafta Sonu Kampanyalı',   color: '#a855f7' };
+    case 'campaign':         return { sales: p.campaign_total,         days: p.campaign_days,         label: 'Tüm Kampanyalı',          color: '#f97316' };
     case 'weekday':          return { sales: p.weekday_total,          days: p.weekday_days,           label: 'Hafta İçi (Kampanyasız)', color: '#60a5fa' };
-    case 'weekend':          return { sales: p.weekend_total,          days: p.weekend_days,           label: 'Hafta Sonu (Kampanyasız)', color: '#34d399' };
-    default:                 return { sales: p.total,                  days: p.total_days,             label: 'Tüm Günler',           color: '#2563b0' };
+    case 'weekend':          return { sales: p.weekend_total,          days: p.weekend_days,           label: 'Hafta Sonu (Kampanyasız)',color: '#34d399' };
+    default:                 return { sales: p.total,                  days: p.total_days,             label: 'Tüm Günler',              color: '#2563b0' };
   }
 }
 
@@ -372,9 +302,9 @@ function populateProducts() {
 }
 
 function getFilteredData() {
-  const year = document.getElementById('yearSel').value;
-  const month = document.getElementById('monthSel').value;
-  const prod  = document.getElementById('productSel').value;
+  const year    = document.getElementById('yearSel').value;
+  const month   = document.getElementById('monthSel').value;
+  const prod    = document.getElementById('productSel').value;
   const dayType = getDayType();
   const yearData = getYearData(year);
   let monthsData = month === 'all' ? yearData : (yearData[month] ? {[month]: yearData[month]} : {});
@@ -395,33 +325,24 @@ function getFilteredData() {
       if (prod !== 'all' && p.product !== prod) return;
       if (!agg[p.product]) agg[p.product] = {
         product: p.product,
-        campaign_weekday_total:0, campaign_weekend_total:0,
-        weekday_total:0, weekend_total:0,
-        campaign_weekday_days:0, campaign_weekend_days:0,
-        weekday_days:0, weekend_days:0
+        campaign_weekday_total:0, campaign_weekend_total:0, weekday_total:0, weekend_total:0,
+        campaign_weekday_days:0,  campaign_weekend_days:0,  weekday_days:0,  weekend_days:0
       };
       const a = agg[p.product];
-      a.campaign_weekday_total += p.campaign_weekday_total;
-      a.campaign_weekend_total += p.campaign_weekend_total;
-      a.weekday_total          += p.weekday_total;
-      a.weekend_total          += p.weekend_total;
-      a.campaign_weekday_days  += p.campaign_weekday_days;
-      a.campaign_weekend_days  += p.campaign_weekend_days;
-      a.weekday_days           += p.weekday_days;
-      a.weekend_days           += p.weekend_days;
+      a.campaign_weekday_total += p.campaign_weekday_total; a.campaign_weekend_total += p.campaign_weekend_total;
+      a.weekday_total          += p.weekday_total;          a.weekend_total          += p.weekend_total;
+      a.campaign_weekday_days  += p.campaign_weekday_days;  a.campaign_weekend_days  += p.campaign_weekend_days;
+      a.weekday_days           += p.weekday_days;           a.weekend_days           += p.weekend_days;
     });
   });
 
   const result = Object.values(agg).map(enrich).sort((a,b) => getSlice(b,dayType).sales - getSlice(a,dayType).sales);
-  result._dc = dc;
-  result._dc.campaign = dc.campaign_weekday + dc.campaign_weekend;
-  result._dc.all      = dc.campaign_weekday + dc.campaign_weekend + dc.weekday + dc.weekend;
+  result._dc = { ...dc, campaign: dc.campaign_weekday+dc.campaign_weekend, all: dc.campaign_weekday+dc.campaign_weekend+dc.weekday+dc.weekend };
   return result;
 }
 
 function getDaysCount(result) {
-  const t = getDayType();
-  const dc = result._dc || {};
+  const t = getDayType(); const dc = result._dc || {};
   if (t==='campaign_weekday') return dc.campaign_weekday||0;
   if (t==='campaign_weekend') return dc.campaign_weekend||0;
   if (t==='campaign')         return dc.campaign||0;
@@ -444,13 +365,12 @@ function getDayTypeLabel() {
 function render() {
   const year = document.getElementById('yearSel').value;
   const month = document.getElementById('monthSel').value;
-  const monthLabel = month === 'all' ? 'Tüm Yıl' : MONTHS_TR[parseInt(month.split('-')[1])] + ' ' + month.split('-')[0];
-  document.getElementById('hdr-month-label').textContent = monthLabel;
+  const ml = month==='all' ? 'Tüm Yıl' : MONTHS_TR[parseInt(month.split('-')[1])]+' '+month.split('-')[0];
+  document.getElementById('hdr-month-label').textContent = ml;
   document.getElementById('hdr-year').textContent = year;
   populateProducts();
   const data = getFilteredData();
-  renderKPI(data);
-  renderTable(data);
+  renderKPI(data); renderTable(data);
   const activeTab = document.querySelector('.tab-btn.active')?.dataset?.tab;
   if (activeTab === 'grafikler') renderCharts(data);
   if (activeTab === 'etki')      renderEtki(data);
@@ -459,517 +379,132 @@ function render() {
 
 function renderKPI(data) {
   const dayType = getDayType();
-  const totV    = data.reduce((s,p) => s + getSlice(p, dayType).sales, 0);
-  const totCW   = data.reduce((s,p) => s + p.campaign_weekday_total, 0);
-  const totCWknd= data.reduce((s,p) => s + p.campaign_weekend_total, 0);
-  const totWkdy = data.reduce((s,p) => s + p.weekday_total, 0);
-  const totWknd = data.reduce((s,p) => s + p.weekend_total, 0);
-  const totAll  = data.reduce((s,p) => s + p.total, 0);
+  const totV    = data.reduce((s,p)=>s+getSlice(p,dayType).sales,0);
+  const totCW   = data.reduce((s,p)=>s+p.campaign_weekday_total,0);
+  const totCWnd = data.reduce((s,p)=>s+p.campaign_weekend_total,0);
+  const totWkdy = data.reduce((s,p)=>s+p.weekday_total,0);
+  const totWknd = data.reduce((s,p)=>s+p.weekend_total,0);
+  const totAll  = data.reduce((s,p)=>s+p.total,0);
   const days    = getDaysCount(data);
-  const avgPerDay = days ? Math.round(totV / days) : 0;
+  const avgPerDay = days ? Math.round(totV/days) : 0;
   const label = getDayTypeLabel();
-
   document.getElementById('kpiGrid').innerHTML = `
-    <div class="kpi-card blue">
-      <div class="kpi-label">${label} Satışı</div>
-      <div class="kpi-value">${fmt(totV)}</div>
-      <div class="kpi-sub">${days} gün · Ort. ${fmt(avgPerDay)}/gün</div>
-    </div>
-    <div class="kpi-card pink">
-      <div class="kpi-label">Hafta İçi Kampanyalı</div>
-      <div class="kpi-value">${fmt(totCW)}</div>
-      <div class="kpi-sub"><span class="kpi-badge badge-up">${totAll?(totCW/totAll*100).toFixed(1):'0'}% toplam</span></div>
-    </div>
-    <div class="kpi-card purple">
-      <div class="kpi-label">Hafta Sonu Kampanyalı</div>
-      <div class="kpi-value">${fmt(totCWknd)}</div>
-      <div class="kpi-sub"><span class="kpi-badge badge-up">${totAll?(totCWknd/totAll*100).toFixed(1):'0'}% toplam</span></div>
-    </div>
-    <div class="kpi-card blue2" style="border-left-color:#60a5fa">
-      <div class="kpi-label">Hafta İçi (Kampanyasız)</div>
-      <div class="kpi-value">${fmt(totWkdy)}</div>
-      <div class="kpi-sub"><span class="kpi-badge badge-down">${totAll?(totWkdy/totAll*100).toFixed(1):'0'}% toplam</span></div>
-    </div>
-    <div class="kpi-card green">
-      <div class="kpi-label">Hafta Sonu (Kampanyasız)</div>
-      <div class="kpi-value">${fmt(totWknd)}</div>
-      <div class="kpi-sub"><span class="kpi-badge badge-down">${totAll?(totWknd/totAll*100).toFixed(1):'0'}% toplam</span></div>
-    </div>`;
+    <div class="kpi-card pink"><div class="kpi-label">${label} Satışı</div><div class="kpi-value">${fmt(totV)}</div><div class="kpi-sub">${days} gün · Ort. ${fmt(avgPerDay)}/gün</div></div>
+    <div class="kpi-card pink"><div class="kpi-label">Hafta İçi Kampanyalı</div><div class="kpi-value">${fmt(totCW)}</div><div class="kpi-sub"><span class="kpi-badge badge-up">${totAll?(totCW/totAll*100).toFixed(1):'0'}% toplam</span></div></div>
+    <div class="kpi-card purple"><div class="kpi-label">Hafta Sonu Kampanyalı</div><div class="kpi-value">${fmt(totCWnd)}</div><div class="kpi-sub"><span class="kpi-badge badge-up">${totAll?(totCWnd/totAll*100).toFixed(1):'0'}% toplam</span></div></div>
+    <div class="kpi-card blue" style="border-color:#60a5fa"><div class="kpi-label">Hafta İçi (Kampanyasız)</div><div class="kpi-value">${fmt(totWkdy)}</div><div class="kpi-sub"><span class="kpi-badge badge-down">${totAll?(totWkdy/totAll*100).toFixed(1):'0'}% toplam</span></div></div>
+    <div class="kpi-card green"><div class="kpi-label">Hafta Sonu (Kampanyasız)</div><div class="kpi-value">${fmt(totWknd)}</div><div class="kpi-sub"><span class="kpi-badge badge-down">${totAll?(totWknd/totAll*100).toFixed(1):'0'}% toplam</span></div></div>`;
 }
 
 function renderTable(data) {
-  const dayType = getDayType();
-  const maxVal  = Math.max(...data.map(p => getSlice(p, dayType).sales), 1);
-
-  // Extra columns in "all" mode
-  const showAll = (dayType === 'all');
-  const thExtra = showAll ? `<th class="num">Hft İçi Kamp.</th><th class="num">Hft Sonu Kamp.</th><th class="num">Hft İçi</th><th class="num">Hft Sonu</th>` : '';
-
-  const thead = `<thead><tr>
-    <th style="min-width:140px">ÜRÜN</th>
-    <th class="num">GÜN</th>
-    <th class="num">${getDayTypeLabel().toUpperCase()} SATIŞ</th>
-    <th class="num bar-cell">PAY %</th>
-    ${thExtra}
-    <th class="num">TOPLAM</th>
-    <th class="num">GÜN BAŞINA</th>
-  </tr></thead>`;
-
-  const colorMap = {
-    campaign_weekday:'linear-gradient(90deg,#f472b6,#fda4af)',
-    campaign_weekend:'linear-gradient(90deg,#a855f7,#c084fc)',
-    campaign:'linear-gradient(90deg,#f97316,#fb923c)',
-    weekday:'linear-gradient(90deg,#60a5fa,#93c5fd)',
-    weekend:'linear-gradient(90deg,#34d399,#6ee7b7)',
-    all:'linear-gradient(90deg,#2563b0,#60a5fa)'
-  };
-
-  const rows = data.map((p, i) => {
-    const sl  = getSlice(p, dayType);
-    const pct = p.total ? (sl.sales/p.total*100).toFixed(1) : 0;
-    const bar = sl.sales ? (sl.sales/maxVal*100).toFixed(1) : 0;
-    const avg = sl.days  ? Math.round(sl.sales/sl.days) : 0;
-    const color = PRODUCT_COLORS[i % PRODUCT_COLORS.length];
-    const tdExtra = showAll ? `<td class="num">${fmt(p.campaign_weekday_total)}</td><td class="num">${fmt(p.campaign_weekend_total)}</td><td class="num">${fmt(p.weekday_total)}</td><td class="num">${fmt(p.weekend_total)}</td>` : '';
-    return `<tr>
-      <td><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${color};margin-right:6px;vertical-align:middle"></span><strong>${p.product}</strong></td>
-      <td class="num">${sl.days}</td>
-      <td class="num"><strong>${fmt(sl.sales)}</strong></td>
-      <td class="bar-cell"><div style="display:flex;align-items:center;gap:6px">
-        <div class="bar-bg" style="flex:1"><div style="width:${bar}%;height:100%;border-radius:4px;background:${colorMap[dayType]||colorMap.all}"></div></div>
-        <span class="pct">${pct}%</span>
-      </div></td>
-      ${tdExtra}
-      <td class="num">${fmt(p.total)}</td>
-      <td class="num"><span style="background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:12px;font-size:12px;font-weight:700">${fmt(avg)}</span></td>
-    </tr>`;
+  const dayType    = getDayType();
+  const grandTotal = data.reduce((s,p)=>s+getSlice(p,dayType).sales,0);
+  const maxVal     = Math.max(...data.map(p=>getSlice(p,dayType).sales),1);
+  const showAll    = (dayType==='all');
+  const thExtra    = showAll ? `<th class="num">Hft İçi Kamp.</th><th class="num">Hft Sonu Kamp.</th><th class="num">Hft İçi</th><th class="num">Hft Sonu</th>` : '';
+  const thead = `<thead><tr><th style="min-width:140px">ÜRÜN</th><th class="num">GÜN</th><th class="num">${getDayTypeLabel().toUpperCase()} SATIŞ</th><th class="num bar-cell">PAY %</th>${thExtra}<th class="num">TOPLAM</th><th class="num">GÜN BAŞINA</th></tr></thead>`;
+  const colorMap = { campaign_weekday:'linear-gradient(90deg,#f472b6,#fda4af)', campaign_weekend:'linear-gradient(90deg,#a855f7,#c084fc)', campaign:'linear-gradient(90deg,#f97316,#fb923c)', weekday:'linear-gradient(90deg,#60a5fa,#93c5fd)', weekend:'linear-gradient(90deg,#34d399,#6ee7b7)', all:'linear-gradient(90deg,#2563b0,#60a5fa)' };
+  const rows = data.map((p,i) => {
+    const sl  = getSlice(p,dayType);
+    const pct = grandTotal ? (sl.sales/grandTotal*100).toFixed(1) : 0;
+    const bar = sl.sales   ? (sl.sales/maxVal*100).toFixed(1) : 0;
+    const avg = sl.days    ? Math.round(sl.sales/sl.days) : 0;
+    const color = PRODUCT_COLORS[i%PRODUCT_COLORS.length];
+    const tdX = showAll ? `<td class="num">${fmt(p.campaign_weekday_total)}</td><td class="num">${fmt(p.campaign_weekend_total)}</td><td class="num">${fmt(p.weekday_total)}</td><td class="num">${fmt(p.weekend_total)}</td>` : '';
+    return `<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${color};margin-right:6px;vertical-align:middle"></span><strong>${p.product}</strong></td><td class="num">${sl.days}</td><td class="num"><strong>${fmt(sl.sales)}</strong></td><td class="bar-cell"><div style="display:flex;align-items:center;gap:6px"><div class="bar-bg" style="flex:1"><div style="width:${bar}%;height:100%;border-radius:4px;background:${colorMap[dayType]||colorMap.all}"></div></div><span class="pct">${pct}%</span></div></td>${tdX}<td class="num">${fmt(p.total)}</td><td class="num"><span style="background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:12px;font-size:12px;font-weight:700">${fmt(avg)}</span></td></tr>`;
   });
-
-  // Totals
-  const totV    = data.reduce((s,p)=>s+getSlice(p,dayType).sales,0);
-  const days    = getDaysCount(data);
-  const totAll  = data.reduce((s,p)=>s+p.total,0);
-  const totPct  = totAll ? (totV/totAll*100).toFixed(1) : 0;
-  const totCW   = data.reduce((s,p)=>s+p.campaign_weekday_total,0);
-  const totCWnd = data.reduce((s,p)=>s+p.campaign_weekend_total,0);
-  const totWkdy = data.reduce((s,p)=>s+p.weekday_total,0);
-  const totWknd = data.reduce((s,p)=>s+p.weekend_total,0);
-  const tdExtTot= showAll ? `<td class="num">${fmt(totCW)}</td><td class="num">${fmt(totCWnd)}</td><td class="num">${fmt(totWkdy)}</td><td class="num">${fmt(totWknd)}</td>` : '';
-  rows.push(`<tr>
-    <td><strong>TOPLAM</strong></td>
-    <td class="num">${days}</td>
-    <td class="num">${fmt(totV)}</td>
-    <td class="bar-cell"><span class="pct">${totPct}%</span></td>
-    ${tdExtTot}
-    <td class="num">${fmt(totAll)}</td>
-    <td class="num"><span style="background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:12px;font-size:12px;font-weight:700">${days?fmt(Math.round(totV/days)):'-'}</span></td>
-  </tr>`);
-
-  document.getElementById('mainTable').innerHTML = thead + '<tbody>' + rows.join('') + '</tbody>';
+  const totV=grandTotal,days=getDaysCount(data),totAll=data.reduce((s,p)=>s+p.total,0),totPct=totAll?(totV/totAll*100).toFixed(1):0;
+  const totCW=data.reduce((s,p)=>s+p.campaign_weekday_total,0),totCWnd=data.reduce((s,p)=>s+p.campaign_weekend_total,0),totWkdy=data.reduce((s,p)=>s+p.weekday_total,0),totWknd=data.reduce((s,p)=>s+p.weekend_total,0);
+  const tdXT=showAll?`<td class="num">${fmt(totCW)}</td><td class="num">${fmt(totCWnd)}</td><td class="num">${fmt(totWkdy)}</td><td class="num">${fmt(totWknd)}</td>`:'';
+  rows.push(`<tr><td><strong>TOPLAM</strong></td><td class="num">${days}</td><td class="num">${fmt(totV)}</td><td class="bar-cell"><span class="pct">${totPct}%</span></td>${tdXT}<td class="num">${fmt(totAll)}</td><td class="num"><span style="background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:12px;font-size:12px;font-weight:700">${days?fmt(Math.round(totV/days)):'-'}</span></td></tr>`);
+  document.getElementById('mainTable').innerHTML = thead+'<tbody>'+rows.join('')+'</tbody>';
 }
 
-function destroyChart(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
+function destroyChart(id) { if(charts[id]){charts[id].destroy();delete charts[id];} }
 
 function renderCharts(data) {
-  const dayType = getDayType();
-  const labels  = data.map(p => p.product);
-
-  // Stacked bar – 4 segments
+  const dayType=getDayType(); const labels=data.map(p=>p.product);
   destroyChart('chartStackedBar');
-  charts['chartStackedBar'] = new Chart(document.getElementById('chartStackedBar'), {
-    type: 'bar',
-    data: { labels, datasets: [
-      { label:'Hft İçi Kampanyalı',  data: data.map(p=>p.campaign_weekday_total),  backgroundColor:'#f472b6', borderRadius:2 },
-      { label:'Hft Sonu Kampanyalı', data: data.map(p=>p.campaign_weekend_total), backgroundColor:'#a855f7', borderRadius:2 },
-      { label:'Hafta İçi',           data: data.map(p=>p.weekday_total),           backgroundColor:'#60a5fa', borderRadius:2 },
-      { label:'Hafta Sonu',          data: data.map(p=>p.weekend_total),           backgroundColor:'#34d399', borderRadius:2 }
-    ]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ position:'top', labels:{ font:{ size:11 } } } },
-      scales:{ x:{ stacked:true, ticks:{ font:{ size:10 }, maxRotation:35 } }, y:{ stacked:true, ticks:{ callback: v=>(v/1000).toFixed(0)+'K' } } }
-    }
-  });
-
-  // Doughnut – 4 segments
+  charts['chartStackedBar']=new Chart(document.getElementById('chartStackedBar'),{type:'bar',data:{labels,datasets:[{label:'Hft İçi Kamp.',data:data.map(p=>p.campaign_weekday_total),backgroundColor:'#f472b6',borderRadius:2},{label:'Hft Sonu Kamp.',data:data.map(p=>p.campaign_weekend_total),backgroundColor:'#a855f7',borderRadius:2},{label:'Hafta İçi',data:data.map(p=>p.weekday_total),backgroundColor:'#60a5fa',borderRadius:2},{label:'Hafta Sonu',data:data.map(p=>p.weekend_total),backgroundColor:'#34d399',borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{x:{stacked:true,ticks:{font:{size:10},maxRotation:35}},y:{stacked:true,ticks:{callback:v=>(v/1000).toFixed(0)+'K'}}}}});
   destroyChart('chartDoughnut');
-  const totCW   = data.reduce((s,p)=>s+p.campaign_weekday_total,0);
-  const totCWnd = data.reduce((s,p)=>s+p.campaign_weekend_total,0);
-  const totWkdy = data.reduce((s,p)=>s+p.weekday_total,0);
-  const totWknd = data.reduce((s,p)=>s+p.weekend_total,0);
-  const grand   = totCW+totCWnd+totWkdy+totWknd;
-  charts['chartDoughnut'] = new Chart(document.getElementById('chartDoughnut'), {
-    type:'doughnut',
-    data:{ labels:['Hft İçi Kamp.','Hft Sonu Kamp.','Hafta İçi','Hafta Sonu'],
-      datasets:[{ data:[totCW,totCWnd,totWkdy,totWknd], backgroundColor:['#f472b6','#a855f7','#60a5fa','#34d399'], borderWidth:3, borderColor:'#fff' }]
-    },
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ position:'bottom' },
-        tooltip:{ callbacks:{ label: ctx=>` ${ctx.label}: ${fmt(ctx.raw)} (${grand?(ctx.raw/grand*100).toFixed(1):0}%)` } } }
-    }
-  });
-
-  // Monthly trend – 4 lines
+  const totCW=data.reduce((s,p)=>s+p.campaign_weekday_total,0),totCWnd=data.reduce((s,p)=>s+p.campaign_weekend_total,0),totWkdy=data.reduce((s,p)=>s+p.weekday_total,0),totWknd=data.reduce((s,p)=>s+p.weekend_total,0),grand=totCW+totCWnd+totWkdy+totWknd;
+  charts['chartDoughnut']=new Chart(document.getElementById('chartDoughnut'),{type:'doughnut',data:{labels:['Hft İçi Kamp.','Hft Sonu Kamp.','Hafta İçi','Hafta Sonu'],datasets:[{data:[totCW,totCWnd,totWkdy,totWknd],backgroundColor:['#f472b6','#a855f7','#60a5fa','#34d399'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmt(ctx.raw)} (${grand?(ctx.raw/grand*100).toFixed(1):0}%)`}}}}});
   destroyChart('chartMonthly');
-  const year = document.getElementById('yearSel').value;
-  const prodFilter = document.getElementById('productSel').value;
-  const yearData = getYearData(year);
-  const months = Object.keys(yearData).sort();
-  const mLabels = months.map(m=>MONTHS_TR[parseInt(m.split('-')[1])]);
-  const getSum = (m,field) => (yearData[m]||[]).filter(p=>prodFilter==='all'||p.product===prodFilter).reduce((s,p)=>s+p[field],0);
-  charts['chartMonthly'] = new Chart(document.getElementById('chartMonthly'), {
-    type:'line',
-    data:{ labels:mLabels, datasets:[
-      { label:'Hft İçi Kamp.',  data:months.map(m=>getSum(m,'campaign_weekday_total')),  borderColor:'#f472b6', backgroundColor:'rgba(244,114,182,0.08)', fill:true, tension:0.4, pointRadius:4 },
-      { label:'Hft Sonu Kamp.', data:months.map(m=>getSum(m,'campaign_weekend_total')), borderColor:'#a855f7', backgroundColor:'rgba(168,85,247,0.08)',   fill:true, tension:0.4, pointRadius:4 },
-      { label:'Hafta İçi',      data:months.map(m=>getSum(m,'weekday_total')),           borderColor:'#60a5fa', backgroundColor:'rgba(96,165,250,0.08)',   fill:true, tension:0.4, pointRadius:4 },
-      { label:'Hafta Sonu',     data:months.map(m=>getSum(m,'weekend_total')),           borderColor:'#34d399', backgroundColor:'rgba(52,211,153,0.08)',   fill:true, tension:0.4, pointRadius:4 }
-    ]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ position:'top' } },
-      scales:{ y:{ ticks:{ callback:v=>(v/1000).toFixed(0)+'K' } } }
-    }
-  });
-
-  // Ratio: campaign_weekday vs weekday
+  const year=document.getElementById('yearSel').value,prodFilter=document.getElementById('productSel').value,yearData=getYearData(year),months=Object.keys(yearData).sort(),mLabels=months.map(m=>MONTHS_TR[parseInt(m.split('-')[1])]),gS=(m,f)=>(yearData[m]||[]).filter(p=>prodFilter==='all'||p.product===prodFilter).reduce((s,p)=>s+p[f],0);
+  charts['chartMonthly']=new Chart(document.getElementById('chartMonthly'),{type:'line',data:{labels:mLabels,datasets:[{label:'Hft İçi Kamp.',data:months.map(m=>gS(m,'campaign_weekday_total')),borderColor:'#f472b6',backgroundColor:'rgba(244,114,182,0.08)',fill:true,tension:0.4,pointRadius:4},{label:'Hft Sonu Kamp.',data:months.map(m=>gS(m,'campaign_weekend_total')),borderColor:'#a855f7',backgroundColor:'rgba(168,85,247,0.08)',fill:true,tension:0.4,pointRadius:4},{label:'Hafta İçi',data:months.map(m=>gS(m,'weekday_total')),borderColor:'#60a5fa',backgroundColor:'rgba(96,165,250,0.08)',fill:true,tension:0.4,pointRadius:4},{label:'Hafta Sonu',data:months.map(m=>gS(m,'weekend_total')),borderColor:'#34d399',backgroundColor:'rgba(52,211,153,0.08)',fill:true,tension:0.4,pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:v=>(v/1000).toFixed(0)+'K'}}}}});
   destroyChart('chartRatio');
-  const ratios = data.map(p => p.weekday_total>0 ? parseFloat((p.campaign_weekday_total/p.weekday_total).toFixed(2)) : 0);
-  charts['chartRatio'] = new Chart(document.getElementById('chartRatio'), {
-    type:'bar',
-    data:{ labels, datasets:[{ label:'Hft İçi Kamp. / Hft İçi Oran', data:ratios,
-      backgroundColor:ratios.map(r=>r>=2?'#10b981':r>=1.5?'#f59e0b':'#ef4444'), borderRadius:5 }]
-    },
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ display:false }, tooltip:{ callbacks:{ label:ctx=>` Oran: ${ctx.raw}x` } } },
-      scales:{ x:{ ticks:{ font:{ size:10 }, maxRotation:35 } }, y:{ ticks:{ callback:v=>v+'x' } } }
-    }
-  });
-
-  // Pie share
+  const ratios=data.map(p=>p.weekday_total>0?parseFloat((p.campaign_weekday_total/p.weekday_total).toFixed(2)):0);
+  charts['chartRatio']=new Chart(document.getElementById('chartRatio'),{type:'bar',data:{labels,datasets:[{label:'Hft İçi Kamp./Normal Oran',data:ratios,backgroundColor:ratios.map(r=>r>=2?'#10b981':r>=1.5?'#f59e0b':'#60a5fa'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` Oran: ${ctx.raw}x`}}},scales:{x:{ticks:{font:{size:10},maxRotation:35}},y:{ticks:{callback:v=>v+'x'}}}}});
   destroyChart('chartShare');
-  charts['chartShare'] = new Chart(document.getElementById('chartShare'), {
-    type:'pie',
-    data:{ labels, datasets:[{ data:data.map(p=>getSlice(p,dayType).sales),
-      backgroundColor:PRODUCT_COLORS.slice(0,data.length), borderWidth:2, borderColor:'#fff' }]
-    },
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ position:'right', labels:{ font:{ size:11 }, boxWidth:12 } } }
-    }
-  });
-}
-
-function renderInsights(data) {
-  const dayType = getDayType();
-  const totCW   = data.reduce((s,p)=>s+p.campaign_weekday_total,0);
-  const totCWnd = data.reduce((s,p)=>s+p.campaign_weekend_total,0);
-  const totWkdy = data.reduce((s,p)=>s+p.weekday_total,0);
-  const totWknd = data.reduce((s,p)=>s+p.weekend_total,0);
-  const totAll  = data.reduce((s,p)=>s+p.total,0);
-  const label   = getDayTypeLabel();
-  const days    = getDaysCount(data);
-  const totV    = data.reduce((s,p)=>s+getSlice(p,dayType).sales,0);
-  const avgDay  = days ? Math.round(totV/days) : 0;
-  const pct = v => totAll ? (v/totAll*100).toFixed(1) : 0;
-
-  const topProd   = data[0];
-  const bestRatio = [...data].sort((a,b)=>(b.campaign_weekday_total/Math.max(1,b.weekday_total))-(a.campaign_weekday_total/Math.max(1,a.weekday_total)))[0];
-  const worstRatio= [...data].sort((a,b)=>(a.campaign_weekday_total/Math.max(1,a.weekday_total))-(b.campaign_weekday_total/Math.max(1,b.weekday_total)))[0];
-  const bestWknd  = [...data].sort((a,b)=>b.weekend_total-a.weekend_total)[0];
-
-  const insights = [
-    { icon:'📊', title:'Gün Türü Dağılımı',
-      text:`Toplam satışın <span class="insight-highlight">%${pct(totCW)}</span>'i hafta içi kampanyalı, <span class="insight-highlight">%${pct(totCWnd)}</span>'i hafta sonu kampanyalı, <span class="insight-highlight">%${pct(totWkdy)}</span>'i hafta içi normal, <span class="insight-highlight">%${pct(totWknd)}</span>'i hafta sonu normal günlerde gerçekleşiyor.` },
-    { icon:'🏆', title:'En Yüksek Kampanya Etkisi (Hafta İçi)',
-      text:`<strong class="insight-highlight">${bestRatio?.product}</strong>, hafta içi kampanyalı günlerde normal hafta içine kıyasla <span class="insight-highlight">${bestRatio?(bestRatio.campaign_weekday_total/Math.max(1,bestRatio.weekday_total)).toFixed(2)+'x</span>':''} daha fazla satıyor.` },
-    { icon:'⚠️', title:'Düşük Kampanya Etkisi',
-      text:`<strong class="insight-highlight">${worstRatio?.product}</strong> kampanyalı hafta içinde en düşük artış oranını gösteriyor (${worstRatio?(worstRatio.campaign_weekday_total/Math.max(1,worstRatio.weekday_total)).toFixed(2)+'x':'-'}). Kampanya stratejisi değerlendirilebilir.` },
-    { icon:'📅', title:`${label} Günlük Ortalama`,
-      text:`Seçili filtrede günlük ortalama <span class="insight-highlight">${fmt(avgDay)} kutu</span> satış gerçekleşiyor (${days} gün üzerinden).` },
-    { icon:'🚀', title:`En Çok Satan (${label})`,
-      text:`<span class="insight-highlight">${topProd?.product}</span>, ${label.toLowerCase()} döneminde <span class="insight-highlight">${fmt(getSlice(topProd,dayType).sales)}</span> kutu ile lider.` },
-    { icon:'📊', title:'Hafta Sonu Kampanya Potansiyeli',
-      text:`Hafta sonu kampanyalı satışta öne çıkan ürün <span class="insight-highlight">${[...data].sort((a,b)=>b.campaign_weekend_total-a.campaign_weekend_total)[0]?.product}</span>. Hafta sonu kampanyaları bu ürünlerde değerlendirilebilir.` }
-  ];
-
-  document.getElementById('insightsGrid').innerHTML = insights.map(i => `
-    <div class="insight-card">
-      <div class="insight-icon">${i.icon}</div>
-      <div class="insight-title">${i.title}</div>
-      <div class="insight-text">${i.text}</div>
-    </div>`).join('');
-
-  renderRanking(data);
-  renderSmallCharts(data);
-}
-
-function renderRanking(data) {
-  const ranked = [...data].sort((a,b) => {
-    const ra = a.weekday_total>0 ? a.campaign_weekday_total/a.weekday_total : 0;
-    const rb = b.weekday_total>0 ? b.campaign_weekday_total/b.weekday_total : 0;
-    return rb-ra;
-  });
-  document.getElementById('rankList').innerHTML = ranked.map((p,i) => {
-    const ratio = p.weekday_total>0 ? (p.campaign_weekday_total/p.weekday_total).toFixed(2) : '-';
-    const rankClass = i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'rank-other';
-    return `<div class="rank-item">
-      <div class="rank-num ${rankClass}">${i+1}</div>
-      <div class="rank-name">${p.product}</div>
-      <div><div class="rank-value">${ratio}x</div><div class="rank-pct">Hft İçi Kamp./Hft İçi</div></div>
-      <div style="margin-left:12px"><div class="rank-value" style="color:#f472b6">${fmt(p.campaign_weekday_total)}</div><div class="rank-pct">hft içi kamp.</div></div>
-      <div style="margin-left:10px"><div class="rank-value" style="color:#a855f7">${fmt(p.campaign_weekend_total)}</div><div class="rank-pct">hft sonu kamp.</div></div>
-      <div style="margin-left:10px"><div class="rank-value" style="color:#60a5fa">${fmt(p.weekday_total)}</div><div class="rank-pct">hft içi</div></div>
-      <div style="margin-left:10px"><div class="rank-value" style="color:#34d399">${fmt(p.weekend_total)}</div><div class="rank-pct">hft sonu</div></div>
-    </div>`;
-  }).join('');
-}
-
-function renderSmallCharts(data) {
-  const dayType = getDayType();
-  const days    = getDaysCount(data);
-
-  destroyChart('chartAvgDay');
-  charts['chartAvgDay'] = new Chart(document.getElementById('chartAvgDay'), {
-    type:'bar',
-    data:{ labels: data.map(p=>p.product),
-      datasets:[{ label:'Günlük Ort. Satış', data: data.map(p=>{ const sl=getSlice(p,dayType); return sl.days?Math.round(sl.sales/sl.days):0; }), backgroundColor:'#8b5cf6', borderRadius:5 }]
-    },
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } },
-      scales:{ x:{ ticks:{ font:{ size:10 }, maxRotation:35 } }, y:{ ticks:{ callback:v=>fmt(v) } } }
-    }
-  });
-
-  destroyChart('chartCampDays');
-  const year = document.getElementById('yearSel').value;
-  const yearData = getYearData(year);
-  const months = Object.keys(yearData).sort();
-  const mLabels = months.map(m=>MONTHS_TR[parseInt(m.split('-')[1])]);
-  charts['chartCampDays'] = new Chart(document.getElementById('chartCampDays'), {
-    type:'bar',
-    data:{ labels:mLabels, datasets:[
-      { label:'Hft İçi Kamp.',  data:months.map(m=>(yearData[m]||[])[0]?.campaign_weekday_days||0), backgroundColor:'#f472b6', borderRadius:3 },
-      { label:'Hft Sonu Kamp.', data:months.map(m=>(yearData[m]||[])[0]?.campaign_weekend_days||0),backgroundColor:'#a855f7', borderRadius:3 },
-      { label:'Hafta İçi',      data:months.map(m=>(yearData[m]||[])[0]?.weekday_days||0),          backgroundColor:'#60a5fa', borderRadius:3 },
-      { label:'Hafta Sonu',     data:months.map(m=>(yearData[m]||[])[0]?.weekend_days||0),          backgroundColor:'#34d399', borderRadius:3 }
-    ]},
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'top', labels:{ font:{ size:10 } } } },
-      scales:{ x:{ stacked:true }, y:{ stacked:true, beginAtZero:true } }
-    }
-  });
-}
-
-
-function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.dataset.tab=''; });
-  event.target.classList.add('active');
-  event.target.dataset.tab = tab;
-  ['tablo','grafikler','etki','ongoru'].forEach(t => document.getElementById('tab-'+t).classList.toggle('hidden', t!==tab));
-  const data = getFilteredData();
-  if (tab==='grafikler') renderCharts(data);
-  if (tab==='etki')      renderEtki(data);
-  if (tab==='ongoru')    renderInsights(data);
+  charts['chartShare']=new Chart(document.getElementById('chartShare'),{type:'pie',data:{labels,datasets:[{data:data.map(p=>getSlice(p,dayType).sales),backgroundColor:PRODUCT_COLORS.slice(0,data.length),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},boxWidth:12}}}}});
 }
 
 function renderEtki(data) {
-  // ── KPI ──────────────────────────────────────────────────────────────
-  const totCW   = data.reduce((s,p)=>s+p.campaign_weekday_total,0);
-  const totWkdy = data.reduce((s,p)=>s+p.weekday_total,0);
-  const dcCW    = data._dc?.campaign_weekday || 0;
-  const dcWkdy  = data._dc?.weekday || 0;
-  const avgCW   = dcCW   ? Math.round(totCW/dcCW)   : 0;
-  const avgWkdy = dcWkdy ? Math.round(totWkdy/dcWkdy): 0;
-  const avgExtra= avgCW - avgWkdy;   // günlük ekstra kutu
-  const ratio   = totWkdy > 0 ? (totCW / totWkdy) : 0;
-  // Toplam ekstra satış: (kampanyalı günlük ort - normal günlük ort) × kampanyalı gün sayısı
-  const extraTotal = dcCW * Math.max(0, avgExtra);
-
-  document.getElementById('etkiKpiGrid').innerHTML = `
-    <div class="kpi-card pink">
-      <div class="kpi-label">Hft İçi Kamp. Günlük Ort.</div>
-      <div class="kpi-value">${fmt(avgCW)}</div>
-      <div class="kpi-sub">Kutu/gün (${dcCW} gün)</div>
-    </div>
-    <div class="kpi-card blue" style="border-color:#60a5fa">
-      <div class="kpi-label">Normal Hft İçi Günlük Ort.</div>
-      <div class="kpi-value">${fmt(avgWkdy)}</div>
-      <div class="kpi-sub">Kutu/gün (${dcWkdy} gün)</div>
-    </div>
-    <div class="kpi-card orange">
-      <div class="kpi-label">Günlük Ekstra Satış</div>
-      <div class="kpi-value">${avgExtra>=0?'+':''}${fmt(avgExtra)}</div>
-      <div class="kpi-sub">Kampanya başına kutu artışı</div>
-    </div>
-    <div class="kpi-card purple">
-      <div class="kpi-label">Kampanya Katsayısı</div>
-      <div class="kpi-value">${ratio.toFixed(2)}x</div>
-      <div class="kpi-sub">Kamp. günlük / Normal günlük</div>
-    </div>
-    <div class="kpi-card green">
-      <div class="kpi-label">Kampanya Katkı Tahmini</div>
-      <div class="kpi-value">+${fmt(extraTotal)}</div>
-      <div class="kpi-sub">Kampanyasız olsaydı yapılmayacak satış</div>
-    </div>`;
-
-  const labels = data.map(p=>p.product);
-
-  // ── Katsayı Grafiği ───────────────────────────────────────────────────
+  const totCW=data.reduce((s,p)=>s+p.campaign_weekday_total,0),totWkdy=data.reduce((s,p)=>s+p.weekday_total,0);
+  const dcCW=data._dc?.campaign_weekday||0,dcWkdy=data._dc?.weekday||0;
+  const avgCW=dcCW?Math.round(totCW/dcCW):0,avgWkdy=dcWkdy?Math.round(totWkdy/dcWkdy):0;
+  const avgExtra=avgCW-avgWkdy,ratio=totWkdy>0?(totCW/totWkdy):0,extraTotal=dcCW*Math.max(0,avgExtra);
+  document.getElementById('etkiKpiGrid').innerHTML=`<div class="kpi-card pink"><div class="kpi-label">Hft İçi Kamp. Günlük Ort.</div><div class="kpi-value">${fmt(avgCW)}</div><div class="kpi-sub">Kutu/gün (${dcCW} gün)</div></div><div class="kpi-card blue" style="border-color:#60a5fa"><div class="kpi-label">Normal Hft İçi Günlük Ort.</div><div class="kpi-value">${fmt(avgWkdy)}</div><div class="kpi-sub">Kutu/gün (${dcWkdy} gün)</div></div><div class="kpi-card orange"><div class="kpi-label">Günlük Ekstra Satış</div><div class="kpi-value">${avgExtra>=0?'+':''}${fmt(avgExtra)}</div><div class="kpi-sub">Kampanya başına kutu artışı</div></div><div class="kpi-card purple"><div class="kpi-label">Kampanya Katsayısı</div><div class="kpi-value">${ratio.toFixed(2)}x</div><div class="kpi-sub">Kamp. günlük / Normal günlük</div></div><div class="kpi-card green"><div class="kpi-label">Kampanya Katkı Tahmini</div><div class="kpi-value">+${fmt(extraTotal)}</div><div class="kpi-sub">Kampanyasız olsaydı yapılmayacak satış</div></div>`;
+  const labels=data.map(p=>p.product);
   destroyChart('chartEtkiRatio');
-  const ratios = data.map(p => {
-    const avgC = p.campaign_weekday_days ? p.campaign_weekday_total/p.campaign_weekday_days : 0;
-    const avgN = p.weekday_days          ? p.weekday_total/p.weekday_days                   : 1;
-    return avgN > 0 ? parseFloat((avgC/avgN).toFixed(2)) : 0;
-  });
-  const ratioColors = ratios.map(r => r>=3?'#10b981':r>=2?'#f59e0b':r>=1?'#60a5fa':'#ef4444');
-  charts['chartEtkiRatio'] = new Chart(document.getElementById('chartEtkiRatio'), {
-    type:'bar',
-    data:{ labels, datasets:[
-      { label:'Kampanya Katsayısı (Kamp.Günlük Ort. / Normal Günlük Ort.)',
-        data: ratios, backgroundColor: ratioColors, borderRadius:6 },
-      { type:'line', label:'Hedef (1x = eşit)',
-        data: Array(labels.length).fill(1), borderColor:'#ef4444',
-        borderDash:[6,3], borderWidth:2, pointRadius:0, fill:false }
-    ]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ position:'top' },
-        tooltip:{ callbacks:{ label: ctx => ctx.datasetIndex===0 ? ` ${ctx.raw}x katsayı` : ` Baz (1x)` } }
-      },
-      scales:{
-        x:{ ticks:{ font:{ size:10 }, maxRotation:35 } },
-        y:{ beginAtZero:true, ticks:{ callback:v=>v+'x' },
-          grid:{ color: ctx => ctx.tick.value===1 ? '#ef4444' : '#f1f5f9' }
-        }
-      }
-    }
-  });
-
-  // ── Ekstra Satış Grafiği ──────────────────────────────────────────────
+  const ratios=data.map(p=>{const aC=p.campaign_weekday_days?p.campaign_weekday_total/p.campaign_weekday_days:0,aN=p.weekday_days?p.weekday_total/p.weekday_days:1;return aN>0?parseFloat((aC/aN).toFixed(2)):0;});
+  charts['chartEtkiRatio']=new Chart(document.getElementById('chartEtkiRatio'),{type:'bar',data:{labels,datasets:[{label:'Kampanya Katsayısı',data:ratios,backgroundColor:ratios.map(r=>r>=3?'#10b981':r>=2?'#f59e0b':r>=1?'#60a5fa':'#ef4444'),borderRadius:6},{type:'line',label:'Baz (1x)',data:Array(labels.length).fill(1),borderColor:'#ef4444',borderDash:[6,3],borderWidth:2,pointRadius:0,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.datasetIndex===0?` ${ctx.raw}x katsayı`:` Baz (1x)`}}},scales:{x:{ticks:{font:{size:10},maxRotation:35}},y:{beginAtZero:true,ticks:{callback:v=>v+'x'}}}}});
   destroyChart('chartEtkiExtra');
-  const extras = data.map(p => {
-    const avgC = p.campaign_weekday_days ? p.campaign_weekday_total/p.campaign_weekday_days : 0;
-    const avgN = p.weekday_days          ? p.weekday_total/p.weekday_days                   : 0;
-    return Math.round(Math.max(0, avgC - avgN) * p.campaign_weekday_days);
-  });
-  charts['chartEtkiExtra'] = new Chart(document.getElementById('chartEtkiExtra'), {
-    type:'bar',
-    data:{ labels, datasets:[{
-      label:'Kampanya Katkısı (Ekstra Kutu)',
-      data: extras,
-      backgroundColor: extras.map((_,i)=>PRODUCT_COLORS[i%PRODUCT_COLORS.length]),
-      borderRadius:5
-    }]},
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } },
-      scales:{ x:{ ticks:{ font:{ size:10 }, maxRotation:35 } }, y:{ ticks:{ callback:v=>(v/1000).toFixed(0)+'K' } } }
-    }
-  });
-
-  // ── Günlük Ort. Karşılaştırma ─────────────────────────────────────────
+  const extras=data.map(p=>{const aC=p.campaign_weekday_days?p.campaign_weekday_total/p.campaign_weekday_days:0,aN=p.weekday_days?p.weekday_total/p.weekday_days:0;return Math.round(Math.max(0,aC-aN)*p.campaign_weekday_days);});
+  charts['chartEtkiExtra']=new Chart(document.getElementById('chartEtkiExtra'),{type:'bar',data:{labels,datasets:[{label:'Kampanya Katkısı (Ekstra Kutu)',data:extras,backgroundColor:extras.map((_,i)=>PRODUCT_COLORS[i%PRODUCT_COLORS.length]),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},maxRotation:35}},y:{ticks:{callback:v=>(v/1000).toFixed(0)+'K'}}}}});
   destroyChart('chartEtkiAvg');
-  const avgCWArr   = data.map(p => p.campaign_weekday_days ? Math.round(p.campaign_weekday_total/p.campaign_weekday_days) : 0);
-  const avgWkdyArr = data.map(p => p.weekday_days          ? Math.round(p.weekday_total/p.weekday_days)                   : 0);
-  charts['chartEtkiAvg'] = new Chart(document.getElementById('chartEtkiAvg'), {
-    type:'bar',
-    data:{ labels, datasets:[
-      { label:'Hft İçi Kampanyalı (Günlük Ort.)', data:avgCWArr,   backgroundColor:'#f472b6', borderRadius:4 },
-      { label:'Normal Hafta İçi (Günlük Ort.)',   data:avgWkdyArr, backgroundColor:'#60a5fa', borderRadius:4 }
-    ]},
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'top' } },
-      scales:{ x:{ ticks:{ font:{ size:10 }, maxRotation:35 } }, y:{ ticks:{ callback:v=>fmt(v) } } }
-    }
-  });
-
-  // ── Aylık Trend ──────────────────────────────────────────────────────
+  const avgCWArr=data.map(p=>p.campaign_weekday_days?Math.round(p.campaign_weekday_total/p.campaign_weekday_days):0),avgWkdyArr=data.map(p=>p.weekday_days?Math.round(p.weekday_total/p.weekday_days):0);
+  charts['chartEtkiAvg']=new Chart(document.getElementById('chartEtkiAvg'),{type:'bar',data:{labels,datasets:[{label:'Hft İçi Kampanyalı (Günlük Ort.)',data:avgCWArr,backgroundColor:'#f472b6',borderRadius:4},{label:'Normal Hafta İçi (Günlük Ort.)',data:avgWkdyArr,backgroundColor:'#60a5fa',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{x:{ticks:{font:{size:10},maxRotation:35}},y:{ticks:{callback:v=>fmt(v)}}}}});
   destroyChart('chartEtkiTrend');
-  const year = document.getElementById('yearSel').value;
-  const prodFilter = document.getElementById('productSel').value;
-  const yearData = getYearData(year);
-  const months = Object.keys(yearData).sort();
-  const mLabels = months.map(m=>MONTHS_TR[parseInt(m.split('-')[1])]);
-  const getSum = (m,field) => (yearData[m]||[]).filter(p=>prodFilter==='all'||p.product===prodFilter).reduce((s,p)=>s+p[field],0);
-  const getDays = (m,field) => { const arr=(yearData[m]||[]); return arr.length ? (arr[0][field]||0) : 0; };
-  const monthlyCWAvg   = months.map(m=>{ const d=getDays(m,'campaign_weekday_days'); return d?Math.round(getSum(m,'campaign_weekday_total')/d):0; });
-  const monthlyWkdyAvg = months.map(m=>{ const d=getDays(m,'weekday_days');          return d?Math.round(getSum(m,'weekday_total')/d):0; });
-  const monthlyRatio   = months.map((_,i)=>{ const n=monthlyWkdyAvg[i]; return n?parseFloat((monthlyCWAvg[i]/n).toFixed(2)):0; });
-
-  charts['chartEtkiTrend'] = new Chart(document.getElementById('chartEtkiTrend'), {
-    type:'line',
-    data:{ labels:mLabels, datasets:[
-      { label:'Hft İçi Kamp. Günlük Ort.', data:monthlyCWAvg,   borderColor:'#f472b6', backgroundColor:'rgba(244,114,182,0.1)', fill:true, tension:0.4, pointRadius:5, yAxisID:'y' },
-      { label:'Normal Hft İçi Günlük Ort.',data:monthlyWkdyAvg, borderColor:'#60a5fa', backgroundColor:'rgba(96,165,250,0.1)',  fill:true, tension:0.4, pointRadius:5, yAxisID:'y' },
-      { label:'Katsayı (sağ eksen)',        data:monthlyRatio,   borderColor:'#f59e0b', borderDash:[5,3], tension:0.4, pointRadius:5, fill:false, yAxisID:'y2' }
-    ]},
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'top' } },
-      scales:{
-        y:  { position:'left',  ticks:{ callback:v=>fmt(v) }, title:{ display:true, text:'Kutu/Gün' } },
-        y2: { position:'right', ticks:{ callback:v=>v+'x' }, grid:{ drawOnChartArea:false }, title:{ display:true, text:'Katsayı' } }
-      }
-    }
-  });
-
-  // ── Detay Tablosu ─────────────────────────────────────────────────────
-  const thead = `<thead style="background:#f1f5f9"><tr>
-    <th style="padding:10px 14px;text-align:left;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0">ÜRÜN</th>
-    <th style="padding:10px 14px;text-align:right;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0">Kamp. Gün</th>
-    <th style="padding:10px 14px;text-align:right;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0">Hft İçi Kamp. Toplam</th>
-    <th style="padding:10px 14px;text-align:right;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0">Kamp. Günlük Ort.</th>
-    <th style="padding:10px 14px;text-align:right;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0">Normal Hft İçi Toplam</th>
-    <th style="padding:10px 14px;text-align:right;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0">Normal Günlük Ort.</th>
-    <th style="padding:10px 14px;text-align:right;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0">Günlük Fark</th>
-    <th style="padding:10px 14px;text-align:right;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0">Katsayı</th>
-    <th style="padding:10px 14px;text-align:right;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0">Toplam Katkı (Ekstra)</th>
-  </tr></thead>`;
-
-  const sorted = [...data].sort((a,b)=>{
-    const ra = a.weekday_days ? (a.campaign_weekday_total/a.campaign_weekday_days)/(a.weekday_total/a.weekday_days) : 0;
-    const rb = b.weekday_days ? (b.campaign_weekday_total/b.campaign_weekday_days)/(b.weekday_total/b.weekday_days) : 0;
-    return rb-ra;
-  });
-
-  const td = (v, right=true, bold=false, style='') =>
-    `<td style="padding:10px 14px;${right?'text-align:right;':''}border-bottom:1px solid #f1f5f9;${bold?'font-weight:700;':''}${style}">${v}</td>`;
-
-  const rows = sorted.map((p,i) => {
-    const avgC = p.campaign_weekday_days ? p.campaign_weekday_total/p.campaign_weekday_days : 0;
-    const avgN = p.weekday_days          ? p.weekday_total/p.weekday_days                   : 0;
-    const diff = avgC - avgN;
-    const rat  = avgN > 0 ? avgC/avgN : 0;
-    const extra= Math.round(Math.max(0,diff)*p.campaign_weekday_days);
-    const ratColor = rat>=3?'#10b981':rat>=2?'#f59e0b':rat>=1?'#2563b0':'#ef4444';
-    const diffColor= diff>=0?'#10b981':'#ef4444';
-    const color = PRODUCT_COLORS[i%PRODUCT_COLORS.length];
-    return `<tr>
-      ${td(`<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${color};margin-right:6px;vertical-align:middle"></span><strong>${p.product}</strong>`,false)}
-      ${td(p.campaign_weekday_days)}
-      ${td(fmt(p.campaign_weekday_total),true,true,'color:#f472b6')}
-      ${td(fmt(Math.round(avgC)))}
-      ${td(fmt(p.weekday_total),true,false,'color:#60a5fa')}
-      ${td(fmt(Math.round(avgN)))}
-      ${td(`<strong style="color:${diffColor}">${diff>=0?'+':''}${fmt(Math.round(diff))}</strong>`)}
-      ${td(`<span style="background:${ratColor}22;color:${ratColor};padding:2px 9px;border-radius:12px;font-weight:700">${rat.toFixed(2)}x</span>`)}
-      ${td(`<strong style="color:#10b981">+${fmt(extra)}</strong>`)}
-    </tr>`;
-  });
-
-  // Toplam satırı
-  const totAvgC = dcCW   ? totCW/dcCW     : 0;
-  const totAvgN = dcWkdy ? totWkdy/dcWkdy : 0;
-  const totDiff = totAvgC - totAvgN;
-  const totRat  = totAvgN > 0 ? totAvgC/totAvgN : 0;
-  const ratC2   = totRat>=3?'#10b981':totRat>=2?'#f59e0b':totRat>=1?'#2563b0':'#ef4444';
-  rows.push(`<tr style="background:#f8fafc">
-    ${td('<strong>TOPLAM / ORTALAMA</strong>',false,true)}
-    ${td(dcCW,true,true)}
-    ${td(fmt(totCW),true,true,'color:#f472b6')}
-    ${td(fmt(Math.round(totAvgC)),true,true)}
-    ${td(fmt(totWkdy),true,true,'color:#60a5fa')}
-    ${td(fmt(Math.round(totAvgN)),true,true)}
-    ${td(`<strong style="color:${totDiff>=0?'#10b981':'#ef4444'}">${totDiff>=0?'+':''}${fmt(Math.round(totDiff))}</strong>`)}
-    ${td(`<span style="background:${ratC2}22;color:${ratC2};padding:2px 9px;border-radius:12px;font-weight:700">${totRat.toFixed(2)}x</span>`)}
-    ${td(`<strong style="color:#10b981">+${fmt(extraTotal)}</strong>`)}
-  </tr>`);
-
-  document.getElementById('etkiTable').innerHTML = thead + '<tbody>' + rows.join('') + '</tbody>';
+  const year=document.getElementById('yearSel').value,prodFilter=document.getElementById('productSel').value,yearData=getYearData(year),months=Object.keys(yearData).sort(),mLabels=months.map(m=>MONTHS_TR[parseInt(m.split('-')[1])]),gS=(m,f)=>(yearData[m]||[]).filter(p=>prodFilter==='all'||p.product===prodFilter).reduce((s,p)=>s+p[f],0),gD=(m,f)=>{const a=yearData[m]||[];return a.length?(a[0][f]||0):0;};
+  const mCWAvg=months.map(m=>{const d=gD(m,'campaign_weekday_days');return d?Math.round(gS(m,'campaign_weekday_total')/d):0;}),mWkdyAvg=months.map(m=>{const d=gD(m,'weekday_days');return d?Math.round(gS(m,'weekday_total')/d):0;}),mRatio=months.map((_,i)=>{const n=mWkdyAvg[i];return n?parseFloat((mCWAvg[i]/n).toFixed(2)):0;});
+  charts['chartEtkiTrend']=new Chart(document.getElementById('chartEtkiTrend'),{type:'line',data:{labels:mLabels,datasets:[{label:'Hft İçi Kamp. Günlük Ort.',data:mCWAvg,borderColor:'#f472b6',backgroundColor:'rgba(244,114,182,0.1)',fill:true,tension:0.4,pointRadius:5,yAxisID:'y'},{label:'Normal Hft İçi Günlük Ort.',data:mWkdyAvg,borderColor:'#60a5fa',backgroundColor:'rgba(96,165,250,0.1)',fill:true,tension:0.4,pointRadius:5,yAxisID:'y'},{label:'Katsayı (sağ eksen)',data:mRatio,borderColor:'#f59e0b',borderDash:[5,3],tension:0.4,pointRadius:5,fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{position:'left',ticks:{callback:v=>fmt(v)},title:{display:true,text:'Kutu/Gün'}},y2:{position:'right',ticks:{callback:v=>v+'x'},grid:{drawOnChartArea:false},title:{display:true,text:'Katsayı'}}}}});
+  const sorted=[...data].sort((a,b)=>{const ra=a.weekday_days?(a.campaign_weekday_total/a.campaign_weekday_days)/(a.weekday_total/a.weekday_days):0,rb=b.weekday_days?(b.campaign_weekday_total/b.campaign_weekday_days)/(b.weekday_total/b.weekday_days):0;return rb-ra;});
+  const th=s=>`<th style="padding:10px 14px;text-align:${s==='left'?'left':'right'};font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid #e2e8f0">`,td=(v,r=true,b=false,s='')=>`<td style="padding:10px 14px;${r?'text-align:right;':''}border-bottom:1px solid #f1f5f9;${b?'font-weight:700;':''}${s}">${v}</td>`;
+  const thead2=`<thead style="background:#f1f5f9"><tr>${th('left')}ÜRÜN</th>${th('right')}Kamp. Gün</th>${th('right')}Hft İçi Kamp. Toplam</th>${th('right')}Kamp. Günlük Ort.</th>${th('right')}Normal Hft İçi Toplam</th>${th('right')}Normal Günlük Ort.</th>${th('right')}Günlük Fark</th>${th('right')}Katsayı</th>${th('right')}Toplam Katkı</th></tr></thead>`;
+  const rows2=sorted.map((p,i)=>{const aC=p.campaign_weekday_days?p.campaign_weekday_total/p.campaign_weekday_days:0,aN=p.weekday_days?p.weekday_total/p.weekday_days:0,diff=aC-aN,rat=aN>0?aC/aN:0,extra=Math.round(Math.max(0,diff)*p.campaign_weekday_days),rC=rat>=3?'#10b981':rat>=2?'#f59e0b':rat>=1?'#2563b0':'#ef4444',dC=diff>=0?'#10b981':'#ef4444',color=PRODUCT_COLORS[i%PRODUCT_COLORS.length];return `<tr>${td(`<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${color};margin-right:6px;vertical-align:middle"></span><strong>${p.product}</strong>`,false)}${td(p.campaign_weekday_days)}${td(fmt(p.campaign_weekday_total),true,true,'color:#f472b6')}${td(fmt(Math.round(aC)))}${td(fmt(p.weekday_total),true,false,'color:#60a5fa')}${td(fmt(Math.round(aN)))}${td(`<strong style="color:${dC}">${diff>=0?'+':''}${fmt(Math.round(diff))}</strong>`)}${td(`<span style="background:${rC}22;color:${rC};padding:2px 9px;border-radius:12px;font-weight:700">${rat.toFixed(2)}x</span>`)}${td(`<strong style="color:#10b981">+${fmt(extra)}</strong>`)}</tr>`;});
+  const tAvgC=dcCW?totCW/dcCW:0,tAvgN=dcWkdy?totWkdy/dcWkdy:0,tDiff=tAvgC-tAvgN,tRat=tAvgN>0?tAvgC/tAvgN:0,rC2=tRat>=3?'#10b981':tRat>=2?'#f59e0b':tRat>=1?'#2563b0':'#ef4444';
+  rows2.push(`<tr style="background:#f8fafc">${td('<strong>TOPLAM / ORTALAMA</strong>',false,true)}${td(dcCW,true,true)}${td(fmt(totCW),true,true,'color:#f472b6')}${td(fmt(Math.round(tAvgC)),true,true)}${td(fmt(totWkdy),true,true,'color:#60a5fa')}${td(fmt(Math.round(tAvgN)),true,true)}${td(`<strong style="color:${tDiff>=0?'#10b981':'#ef4444'}">${tDiff>=0?'+':''}${fmt(Math.round(tDiff))}</strong>`)}${td(`<span style="background:${rC2}22;color:${rC2};padding:2px 9px;border-radius:12px;font-weight:700">${tRat.toFixed(2)}x</span>`)}${td(`<strong style="color:#10b981">+${fmt(extraTotal)}</strong>`)}</tr>`);
+  document.getElementById('etkiTable').innerHTML=thead2+'<tbody>'+rows2.join('')+'</tbody>';
 }
 
-// Init
-onYearChange();
+function renderInsights(data) {
+  const dayType=getDayType(),totCW=data.reduce((s,p)=>s+p.campaign_weekday_total,0),totCWnd=data.reduce((s,p)=>s+p.campaign_weekend_total,0),totWkdy=data.reduce((s,p)=>s+p.weekday_total,0),totWknd=data.reduce((s,p)=>s+p.weekend_total,0),totAll=data.reduce((s,p)=>s+p.total,0),label=getDayTypeLabel(),days=getDaysCount(data),totV=data.reduce((s,p)=>s+getSlice(p,dayType).sales,0),avgDay=days?Math.round(totV/days):0,pct=v=>totAll?(v/totAll*100).toFixed(1):0;
+  const topProd=[...data].sort((a,b)=>getSlice(b,dayType).sales-getSlice(a,dayType).sales)[0],bestRatio=[...data].sort((a,b)=>(b.campaign_weekday_total/Math.max(1,b.weekday_total))-(a.campaign_weekday_total/Math.max(1,a.weekday_total)))[0],worstRatio=[...data].sort((a,b)=>(a.campaign_weekday_total/Math.max(1,a.weekday_total))-(b.campaign_weekday_total/Math.max(1,b.weekday_total)))[0],bestWknd=[...data].sort((a,b)=>b.campaign_weekend_total-a.campaign_weekend_total)[0];
+  document.getElementById('insightsGrid').innerHTML=[
+    {icon:'📊',title:'Gün Türü Dağılımı',text:`Toplam satışın <span class="insight-highlight">%${pct(totCW)}</span>'i hafta içi kampanyalı, <span class="insight-highlight">%${pct(totCWnd)}</span>'i hafta sonu kampanyalı, <span class="insight-highlight">%${pct(totWkdy)}</span>'i hafta içi normal, <span class="insight-highlight">%${pct(totWknd)}</span>'i hafta sonu normal günlerde gerçekleşiyor.`},
+    {icon:'🏆',title:'En Yüksek Kampanya Etkisi',text:`<strong class="insight-highlight">${bestRatio?.product}</strong>, hafta içi kampanyalı günlerde normal hafta içine kıyasla <span class="insight-highlight">${bestRatio?(bestRatio.campaign_weekday_total/Math.max(1,bestRatio.weekday_total)).toFixed(2)+'x</span>':''} daha fazla satıyor.`},
+    {icon:'⚠️',title:'Düşük Kampanya Etkisi',text:`<strong class="insight-highlight">${worstRatio?.product}</strong> kampanyalı hafta içinde en düşük artış oranını gösteriyor (${worstRatio?(worstRatio.campaign_weekday_total/Math.max(1,worstRatio.weekday_total)).toFixed(2)+'x':'-'}).`},
+    {icon:'📅',title:`${label} Günlük Ortalama`,text:`Seçili filtrede günlük ortalama <span class="insight-highlight">${fmt(avgDay)} kutu</span> satış gerçekleşiyor (${days} gün üzerinden).`},
+    {icon:'🚀',title:`En Çok Satan (${label})`,text:`<span class="insight-highlight">${topProd?.product}</span>, ${label.toLowerCase()} döneminde <span class="insight-highlight">${fmt(getSlice(topProd,dayType).sales)}</span> kutu ile lider.`},
+    {icon:'📊',title:'Hafta Sonu Kampanya Potansiyeli',text:`Hafta sonu kampanyalı satışta öne çıkan ürün <span class="insight-highlight">${bestWknd?.product}</span>. Hafta sonu kampanyaları bu ürünlerde değerlendirilebilir.`}
+  ].map(i=>`<div class="insight-card"><div class="insight-icon">${i.icon}</div><div class="insight-title">${i.title}</div><div class="insight-text">${i.text}</div></div>`).join('');
+  destroyChart('chartAvgDay');
+  charts['chartAvgDay']=new Chart(document.getElementById('chartAvgDay'),{type:'bar',data:{labels:data.map(p=>p.product),datasets:[{label:'Günlük Ort. Satış',data:data.map(p=>{const sl=getSlice(p,dayType);return sl.days?Math.round(sl.sales/sl.days):0;}),backgroundColor:'#8b5cf6',borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10},maxRotation:35}},y:{ticks:{callback:v=>fmt(v)}}}}});
+  destroyChart('chartCampDays');
+  const year=document.getElementById('yearSel').value,yearData=getYearData(year),months=Object.keys(yearData).sort(),mLabels=months.map(m=>MONTHS_TR[parseInt(m.split('-')[1])]);
+  charts['chartCampDays']=new Chart(document.getElementById('chartCampDays'),{type:'bar',data:{labels:mLabels,datasets:[{label:'Hft İçi Kamp.',data:months.map(m=>(yearData[m]||[])[0]?.campaign_weekday_days||0),backgroundColor:'#f472b6',borderRadius:3},{label:'Hft Sonu Kamp.',data:months.map(m=>(yearData[m]||[])[0]?.campaign_weekend_days||0),backgroundColor:'#a855f7',borderRadius:3},{label:'Hafta İçi',data:months.map(m=>(yearData[m]||[])[0]?.weekday_days||0),backgroundColor:'#60a5fa',borderRadius:3},{label:'Hafta Sonu',data:months.map(m=>(yearData[m]||[])[0]?.weekend_days||0),backgroundColor:'#34d399',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}}}});
+  const ranked=[...data].sort((a,b)=>{const ra=a.weekday_total>0?a.campaign_weekday_total/a.weekday_total:0,rb=b.weekday_total>0?b.campaign_weekday_total/b.weekday_total:0;return rb-ra;});
+  document.getElementById('rankList').innerHTML=ranked.map((p,i)=>{const ratio=p.weekday_total>0?(p.campaign_weekday_total/p.weekday_total).toFixed(2):'-',rC=i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'rank-other';return `<div class="rank-item"><div class="rank-num ${rC}">${i+1}</div><div class="rank-name">${p.product}</div><div><div class="rank-value">${ratio}x</div><div class="rank-pct">Hft İçi Kamp./Hft İçi</div></div><div style="margin-left:12px"><div class="rank-value" style="color:#f472b6">${fmt(p.campaign_weekday_total)}</div><div class="rank-pct">hft içi kamp.</div></div><div style="margin-left:10px"><div class="rank-value" style="color:#a855f7">${fmt(p.campaign_weekend_total)}</div><div class="rank-pct">hft sonu kamp.</div></div><div style="margin-left:10px"><div class="rank-value" style="color:#60a5fa">${fmt(p.weekday_total)}</div><div class="rank-pct">hft içi</div></div><div style="margin-left:10px"><div class="rank-value" style="color:#34d399">${fmt(p.weekend_total)}</div><div class="rank-pct">hft sonu</div></div></div>`;}).join('');
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.dataset.tab='';});
+  event.target.classList.add('active'); event.target.dataset.tab=tab;
+  ['tablo','grafikler','etki','ongoru'].forEach(t=>document.getElementById('tab-'+t).classList.toggle('hidden',t!==tab));
+  const data=getFilteredData();
+  if(tab==='grafikler') renderCharts(data);
+  if(tab==='etki')      renderEtki(data);
+  if(tab==='ongoru')    renderInsights(data);
+}
+
+// Yıl seçeneklerini doldur ve başlat
+(function init() {
+  const years = Object.keys(SALES_DATA).sort();
+  const yearSel = document.getElementById('yearSel');
+  yearSel.innerHTML = years.map(y=>`<option value="${y}">${y}</option>`).join('');
+  onYearChange();
+})();
 </script>
 </body>
 </html>
